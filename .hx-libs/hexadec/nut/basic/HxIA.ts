@@ -1,11 +1,10 @@
-class HxIA extends HTMLElement{
+class HxIA extends HxComponent{
     constructor(){
         super();
         const shadow=this.attachShadow({mode:"open"});
         let container=document.createElement("div");
         container.className="container";
-        let style=document.createElement("style");
-        style.textContent=`
+        this.createStyle(`
             .container{
                 position:relative;
                 background:var(--hx-ia-bgcolor,var(--hx-global-bgcolor));
@@ -21,11 +20,10 @@ class HxIA extends HTMLElement{
             .container:active{
                 box-shadow:0 0 4px 1px var(--hx-ia-act-color,var(--hx-global-theme-color));
             }
-        `;
+        `);
         let areaSlot=document.createElement("slot");
         areaSlot.setAttribute("name","area");
         container.appendChild(areaSlot);
-        shadow.appendChild(style);
         shadow.appendChild(container);
     }
 }
