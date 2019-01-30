@@ -1,0 +1,57 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>test</title>
+	<style>
+		.row{
+			display:flex;
+		}
+		.row>*{
+			flex:1;
+			border:solid #fff 2px;
+			text-align:center;
+			color:#fff;
+			text-shadow:0 0 20px #fff;
+		}
+		.box{
+			background:#333;
+			width:320px;
+		}
+		.strong{
+			font-size:36px;
+			
+		}
+		.box>.row:first-child>*:first-child{
+			border-radius-top-left:4px
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="row">
+			<div>
+				<div>西城一中</div>
+				<div class="strong">21</div>
+			</div>
+			<div>
+				<div>东区高中</div>
+				<div class="strong">16</div>
+			</div>
+		</div>
+		<div class="row">
+			<div style="padding:8px 0;flex:0.7">
+				<div class="strong">
+					1<sub>ST</sub>
+				</div>
+			</div>
+			<div class="strong" style="padding:8px 0">
+				00:00
+			</div>
+			<div style="flex:0.7">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+				

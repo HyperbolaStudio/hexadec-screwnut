@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Web Component Demo</title>
+        <script src="has_custom_element.js"></script>
+        <script src="webcomponents-bundle.js"></script>
+        <script src="hxtest.js"></script>
+        <script src="ia.js"></script>
+        <link rel="stylesheet" href="color.css">
+        <style>
+            #alert{
+                border: dotted 2px #000;
+            }
+            .hidden{
+                display:none;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>HxTest</h1>
+        <hx-test test="aa">
+            <style>
+                hx-test{
+                    --hx-test-hov-color:#f00;
+                }
+            </style>
+            <div slot="test">Hello Slot!</div>
+        </hx-test>
+        <h1>Hx Interaction area</h1>
+        <hx-ia>
+            <div slot="area">Hello World!</div>
+        </hx-ia>
+        <h1>CSS Flexiable Box Example</h1>
+        <div>
+            <style>
+                .hx-test-flex{
+                    display: flex;
+                    height:400px;
+                    width:800px;
+                }
+                .hx-test-item{
+                    flex:1;
+                    margin:4px;
+                }
+            </style>
+            <h2>align-item</h2>
+            <div>Styles are available with dynamatic contents. Modify the contents and size in debugging console and see!</div>
+            <div class="hx-test-flex hx-apr-bgcolor-darkblue" >
+                <div class="hx-test-item hx-apr-bgcolor-blue" style="align-self: baseline">
+                    baseline
+                </div>
+                <div class="hx-test-item hx-apr-bgcolor-green"style="align-self:flex-end">
+                    flex-end
+                </div>
+                <div class="hx-test-item hx-apr-bgcolor-purple"style="align-self:center">
+                    center
+                </div>
+                <div class="hx-test-item hx-apr-bgcolor-orange"style="align-self:flex-start">
+                    flex-start
+                </div>
+                <div class="hx-test-item hx-apr-bgcolor-brown"style="align-self:stretch">
+                    stretch
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
