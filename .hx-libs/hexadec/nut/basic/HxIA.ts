@@ -1,9 +1,9 @@
 class HxIA extends HxComponent{
     constructor(){
         super();
-        const shadow=this.attachShadow({mode:"open"});
-        let container=document.createElement("div");
-        container.className="container";
+        const shadow:ShadowRoot = this.attachShadow({mode:"open"});
+        let container:HTMLDivElement = document.createElement("div");
+        container.className = "container";
         this.createStyle(`
             .container{
                 position:relative;
@@ -21,7 +21,7 @@ class HxIA extends HxComponent{
                 box-shadow:0 0 4px 1px var(--hx-ia-act-color,var(--hx-global-theme-color));
             }
         `);
-        let areaSlot=document.createElement("slot");
+        let areaSlot:HTMLSlotElement = document.createElement("slot");
         areaSlot.setAttribute("name","area");
         container.appendChild(areaSlot);
         shadow.appendChild(container);
