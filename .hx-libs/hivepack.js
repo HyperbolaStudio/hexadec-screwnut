@@ -22,10 +22,9 @@ var hive = {
                 let srcJSON = JSON.parse(xhr.responseText);
                 for (let srcCount = 0; srcCount < srcJSON.src.length; srcCount++) {
                     let srcPath = srcJSON.src[srcCount];
+                    xhr.open("GET");
                 }
             }
         };
-        for (let i = 0; i < packDepth; i++) {
-        }
     }
 };
