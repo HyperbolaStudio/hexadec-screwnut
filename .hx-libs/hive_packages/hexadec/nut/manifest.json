@@ -1,0 +1,8 @@
+{
+    "hive":"hx_package",
+    "includePacks":[
+        "basic",
+        "advanced"
+    ],
+    "includeScripts":[]
+}
