@@ -1,0 +1,7 @@
+{
+    "hive":"hx_package",
+    "includePacks":[
+        "nut"
+    ],
+    "includeScripts":[]
+}

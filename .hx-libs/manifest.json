@@ -1,0 +1,9 @@
+{
+    "hive":"hx_package",
+    "includePacks":[
+        "hexadec"
+    ],
+    "includeScripts":[
+        "i"
+    ]
+}
