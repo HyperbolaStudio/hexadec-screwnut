@@ -1,8 +1,0 @@
-{
-    "hive":"hx_package",
-    "includePacks":[],
-    "includeScripts":[
-        "HxComponent",
-        "HxIA"
-    ]
-}

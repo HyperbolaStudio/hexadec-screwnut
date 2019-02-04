@@ -13,6 +13,9 @@ class HxButton extends HxIA {
                 box-shadow:0 0 4px var(--hx-ia-act-color,var(--hx-global-theme-secondary-color));
                 transition:box-shadow 0.2s,border 0.2s;
             }
+            .container.flat{
+                box-shadow:none;
+            }
             @media(min-width:800px){
                 .container:hover{
                     box-shadow:0 0 8px 1px var(--hx-ia-act-color,var(--hx-global-theme-secondary-color));
@@ -38,10 +41,50 @@ class HxButton extends HxIA {
         titleSlot.setAttribute('name', 'title');
         container.appendChild(imgSlot);
         container.appendChild(titleSlot);
-        container.setAttribute("role", "button");
+        container.setAttribute('role', 'button');
     }
     static get observedAttributes() {
-        return ['inline', 'circle', 'rounded'];
+        return ['inline', 'icon', 'rounded', 'flat'];
+    }
+    //custom properties
+    get isFlat() {
+        let attrTarget = 'flat';
+        return (this.getAttribute(attrTarget) == null) ? false : true;
+    }
+    get isRounded() {
+        let attrTarget = 'rounded';
+        return (this.getAttribute(attrTarget) == null) ? false : true;
+    }
+    get isIcon() {
+        let attrTarget = 'icon';
+        return (this.getAttribute(attrTarget) == null) ? false : true;
+    }
+    set isFlat(is) {
+        let attrTarget = 'flat';
+        if (is) {
+            this.setAttribute(attrTarget, '');
+        }
+        else {
+            this.removeAttribute(attrTarget);
+        }
+    }
+    set isRounded(is) {
+        let attrTarget = 'rounded';
+        if (is) {
+            this.setAttribute(attrTarget, '');
+        }
+        else {
+            this.removeAttribute(attrTarget);
+        }
+    }
+    set isIcon(is) {
+        let attrTarget = 'icon';
+        if (is) {
+            this.setAttribute(attrTarget, '');
+        }
+        else {
+            this.removeAttribute(attrTarget);
+        }
     }
     attributeChangedCallback(name, oldVal, newVal) {
         let shadow = this.shadowRoot;
@@ -54,19 +97,14 @@ class HxButton extends HxIA {
                 container.style.display = 'inline-flex';
             }
         }
-        else if (name === 'circle') {
-            container.querySelector('slot[name = title]').style.display = 'none';
+        else if (name === 'icon') {
             if (newVal === null) {
                 container.querySelector('slot[name = title]').style.display = '';
                 container.style.padding = '0 10px';
-                container.style.borderRadius = '2px';
-                container.style.lineHeight = '36px';
             }
             else {
                 container.querySelector('slot[name = title]').style.display = 'none';
-                container.style.padding = '8px';
-                container.style.borderRadius = '32px';
-                container.style.lineHeight = '';
+                container.style.padding = '6px';
             }
         }
         else if (name === 'rounded') {
@@ -77,6 +115,14 @@ class HxButton extends HxIA {
                 container.style.borderRadius = '36px';
             }
         }
+        else if (name === 'flat') {
+            if (newVal === null) {
+                container.classList.remove('flat');
+            }
+            else {
+                container.classList.add('flat');
+            }
+        }
     }
 }
-customElements.define("hx-button", HxButton);
+customElements.define('hx-button', HxButton);

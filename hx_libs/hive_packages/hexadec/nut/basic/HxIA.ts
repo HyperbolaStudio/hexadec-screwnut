@@ -29,6 +29,18 @@ class HxIA extends HxComponent{
     static get observedAttributes():string[]{
         return ['inline'];
     }
+    get isInline():boolean{
+        let attrTarget:string = 'inline';
+        return (this.getAttribute(attrTarget)==null)?false:true;
+    }
+    set isInline(is:boolean){
+        let attrTarget:string = 'inline';
+        if(is){
+            this.setAttribute(attrTarget,'');
+        }else{
+            this.removeAttribute(attrTarget);
+        }
+    }
     attributeChangedCallback(name:string , oldVal:string , newVal:string){
         if(name === 'inline'){
             let shadow:any = this.shadowRoot;

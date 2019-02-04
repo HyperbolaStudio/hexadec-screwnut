@@ -142,7 +142,7 @@
                     </hx-button>
                 </div>
                 <div role="group" style="display:flex">
-                    <hx-button inline circle  style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black">
+                    <hx-button inline rounded icon  style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black">
                         <div slot="img">
                             <img style="width:24px;height:24px" src="left.svg"/>
                         </div>
@@ -176,6 +176,47 @@
             </div>
         </div>
         <h2>TODO</h2>
-        	实现Title bar
+            实现Title bar
+            <style>
+                    .titlebar{
+                        height:48px;
+                        display:flex;
+                        align-items:center;
+                    }
+                    .titlebar>*{
+                        display:flex;
+                        align-items:center;
+                    }
+                    .titlebar .titlegroup>h1{
+                        font-size:1.2em;
+                        font-weight: 400;
+                        margin:0;
+                    }
+                    .titlebar .titlegroup>h2{
+                        font-size:1em;
+                        font-weight: 200;
+                        margin:0;
+                    }
+                    .titlebar .titlegroup>h1:last-child{
+                        font-size:1.6em !important;
+                    }
+                </style>
+        <div role="toolbar" class="titlebar" style="background:#ff0;">
+            <div class="left" style="display:flex;align-items: center">
+                <hx-button inline rounded flat icon style="--hx-ia-act-color:var(--hx-var-color-orange)">
+                        <div slot="img">
+                            <img style="width:24px;height:24px" src="left.svg"/>
+                        </div>
+                        <div slot="title">inline button with image</div>
+                </hx-button>
+                <div class="titlegroup">
+                    <h1>Title</h1>
+                    <h2>SubTitle</h2>
+                </div>
+                
+            </div>
+            <div class="right">
+            </div>
+        </div>
     </body>
 </html>
