@@ -2,37 +2,10 @@ class HxButton extends HxIA{
     constructor(){
         super();
         let shadow:any = this.shadowRoot;
-        let style:any = shadow.querySelector('style');
-        style.textContent=`
-            .container{
-                position:relative;
-                background:var(--hx-ia-bgcolor,var(--hx-global-bgcolor));
-                color:var(--hx-ia-fgcolor,var(--hx-global-fgcolor));
-                border:none;
-                box-shadow:0 0 4px var(--hx-ia-act-color,var(--hx-global-theme-secondary-color));
-                transition:box-shadow 0.2s,border 0.2s;
-            }
-            .container.flat{
-                box-shadow:none;
-            }
-            @media(min-width:800px){
-                .container:hover{
-                    box-shadow:0 0 8px 1px var(--hx-ia-act-color,var(--hx-global-theme-secondary-color));
-                }
-            }
-            .container:active{
-                box-shadow:0 0 4px 1px var(--hx-ia-act-color,var(--hx-global-theme-secondary-color));
-            }
-        `;
+        let link:HTMLLinkElement = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = './hx_libs/hive_packages/hexadec/nut/basic/HxButton.css';
         let container:any = shadow.querySelector('.container');
-        container.style.borderRadius = '2px';
-        container.style.padding='0 10px';
-        container.style.margin='8px';
-        container.style.lineHeight='36px';
-        container.style.backgroundColor = 'var(--hx-button-bgcolor,var(--hx-global-theme-main-color))';
-        container.style.color = 'var(--hx-button-fgcolor,var(--hx-global-theme-fgcolor))';
-        container.style.alignItems = 'center';
-        container.style.flexDirection = 'var(--hx-button-dir)';
         container.querySelector('slot[name = area]').remove();
         let imgSlot:HTMLSlotElement = document.createElement('slot');
         imgSlot.setAttribute('name' , 'img');
@@ -40,6 +13,7 @@ class HxButton extends HxIA{
         titleSlot.setAttribute('name' , 'title');
         container.appendChild(imgSlot);
         container.appendChild(titleSlot);
+        container.appendChild(link);
         container.setAttribute('role','button');
     }
     static get observedAttributes():string[]{
