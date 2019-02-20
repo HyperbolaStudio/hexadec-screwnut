@@ -12,13 +12,13 @@ class HxComponent extends HTMLElement{
     }
 }
 class NutDesignDeclaration{
-    _CSSFilesMap:Map<string,string> = new Map();
+    _CSSFilesMap:Map<string,string|string[]> = new Map();
     constructor(){
         //test code
         this._CSSFilesMap.set('hx-button','./hx_libs/hive_packages/hexadec/nut/basic/HxButton.css')
         //test code end
     }
-    get CSSFilesMap():Map<string,string>{
+    get CSSFilesMap():Map<string,string|string[]>{
         return this._CSSFilesMap
     }
 }
