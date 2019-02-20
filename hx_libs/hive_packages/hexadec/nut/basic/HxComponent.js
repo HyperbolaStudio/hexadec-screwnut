@@ -2,16 +2,21 @@
 class HxComponent extends HTMLElement {
     constructor() {
         super();
+        this.componentTagName = '';
+        //shadow attachment
+        this.attachShadow({ mode: 'open' });
+        //add style handler links list
+        let styleLinksList = document.createElement('div');
     }
-    createStyle(styleText) {
-        let style = document.createElement('style');
-        style.textContent = styleText;
-        if (this.shadowRoot) {
-            this.shadowRoot.appendChild(style);
-        }
-        else {
-            throw new Error(`Shadow Root is not openen or not exist. try "attachShadow({mode:'open'})" first. `);
-        }
-        return style;
+}
+class NutDesignDeclaration {
+    constructor() {
+        this._CSSFilesMap = new Map();
+        //test code
+        this._CSSFilesMap.set('hx-button', './hx_libs/hive_packages/hexadec/nut/basic/HxButton.css');
+        //test code end
+    }
+    get CSSFilesMap() {
+        return this._CSSFilesMap;
     }
 }

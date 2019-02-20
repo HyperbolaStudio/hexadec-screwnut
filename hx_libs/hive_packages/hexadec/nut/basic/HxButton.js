@@ -2,6 +2,7 @@
 class HxButton extends HxIA {
     constructor() {
         super();
+        this.componentTagName = 'hx-button';
         let shadow = this.shadowRoot;
         let link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -17,48 +18,52 @@ class HxButton extends HxIA {
         container.appendChild(link);
         container.setAttribute('role', 'button');
     }
+    //custom properties getter/setter
+    get flat() {
+        let attrTarget = 'flat';
+        return this.getAttribute(attrTarget) !== null;
+    }
+    set flat(is) {
+        let attrTarget = 'flat';
+        if (is) {
+            this.setAttribute(attrTarget, '');
+        }
+        else {
+            this.removeAttribute(attrTarget);
+        }
+    }
+    get rounded() {
+        let attrTarget = 'rounded';
+        return this.getAttribute(attrTarget) !== null;
+    }
+    set rounded(is) {
+        let attrTarget = 'rounded';
+        if (is) {
+            this.setAttribute(attrTarget, '');
+        }
+        else {
+            this.removeAttribute(attrTarget);
+        }
+    }
+    get icon() {
+        let attrTarget = 'icon';
+        return this.getAttribute(attrTarget) !== null;
+    }
+    set icon(is) {
+        let attrTarget = 'icon';
+        if (is) {
+            this.setAttribute(attrTarget, '');
+        }
+        else {
+            this.removeAttribute(attrTarget);
+        }
+    }
+    //style handler
+    styleHandler(styleList) {
+    }
+    //attr listener
     static get observedAttributes() {
         return ['inline', 'icon', 'rounded', 'flat'];
-    }
-    //custom properties
-    get isFlat() {
-        let attrTarget = 'flat';
-        return (this.getAttribute(attrTarget) == null) ? false : true;
-    }
-    get isRounded() {
-        let attrTarget = 'rounded';
-        return (this.getAttribute(attrTarget) == null) ? false : true;
-    }
-    get isIcon() {
-        let attrTarget = 'icon';
-        return (this.getAttribute(attrTarget) == null) ? false : true;
-    }
-    set isFlat(is) {
-        let attrTarget = 'flat';
-        if (is) {
-            this.setAttribute(attrTarget, '');
-        }
-        else {
-            this.removeAttribute(attrTarget);
-        }
-    }
-    set isRounded(is) {
-        let attrTarget = 'rounded';
-        if (is) {
-            this.setAttribute(attrTarget, '');
-        }
-        else {
-            this.removeAttribute(attrTarget);
-        }
-    }
-    set isIcon(is) {
-        let attrTarget = 'icon';
-        if (is) {
-            this.setAttribute(attrTarget, '');
-        }
-        else {
-            this.removeAttribute(attrTarget);
-        }
     }
     attributeChangedCallback(name, oldVal, newVal) {
         let shadow = this.shadowRoot;

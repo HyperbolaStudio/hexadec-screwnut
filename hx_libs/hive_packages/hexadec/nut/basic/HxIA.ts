@@ -1,7 +1,10 @@
 class HxIA extends HxComponent{
     constructor(){
         super();
-        const shadow:ShadowRoot = this.attachShadow({mode:'open'});
+        let shadow:ShadowRoot = this.shadowRoot?this.shadowRoot:this.attachShadow({mode:'open'});
+        if(this.shadowRoot){
+            shadow = this.shadowRoot
+        };
         let container:HTMLDivElement = document.createElement('div');
         container.className = 'container';
         // this.createStyle(`
@@ -29,11 +32,11 @@ class HxIA extends HxComponent{
     static get observedAttributes():string[]{
         return ['inline'];
     }
-    get isInline():boolean{
+    get inline():boolean{
         let attrTarget:string = 'inline';
-        return (this.getAttribute(attrTarget)==null)?false:true;
+        return this.getAttribute(attrTarget) !== null;
     }
-    set isInline(is:boolean){
+    set inline(is:boolean){
         let attrTarget:string = 'inline';
         if(is){
             this.setAttribute(attrTarget,'');
