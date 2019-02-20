@@ -6,7 +6,8 @@ class HxComponent extends HTMLElement {
         //shadow attachment
         this.attachShadow({ mode: 'open' });
         //add style handler links list
-        let styleLinksList = document.createElement('div');
+        this.styleLinksList = document.createElement('div');
+        this.styleLinksList.className = 'design-declaration';
     }
 }
 class NutDesignDeclaration {
@@ -20,3 +21,4 @@ class NutDesignDeclaration {
         return this._CSSFilesMap;
     }
 }
+var nutStyle = new NutDesignDeclaration();

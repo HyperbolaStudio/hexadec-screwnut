@@ -59,7 +59,16 @@ class HxButton extends HxIA {
         }
     }
     //style handler
-    styleHandler(styleList) {
+    updateStyle() {
+        let styleList = nutStyle.CSSFilesMap.get(this.componentTagName);
+        if (styleList) {
+            if (typeof (styleList) === 'string') {
+                styleList = [styleList];
+            }
+            styleList.forEach((val, index, arr) => {
+                this.styleLinksList; //TODO
+            });
+        }
     }
     //attr listener
     static get observedAttributes() {
