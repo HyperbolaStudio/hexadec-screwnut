@@ -1,8 +1,9 @@
 {
-    "hive":"hx_package",
+    "hive":"package",
     "includePacks":[],
-    "includeScripts":[
+    "includeModules":[
         "HxComponent",
-        "HxIA"
+        "HxIA",
+        "HxButton"
     ]
 }

@@ -3,9 +3,6 @@ class HxButton extends HxIA{
         super();
         this.componentTagName = 'hx-button';
         let shadow:any = this.shadowRoot;
-        let link:HTMLLinkElement = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.href = './hx_libs/hive_packages/hexadec/nut/basic/HxButton.css';
         let container:any = shadow.querySelector('.container');
         container.querySelector('slot[name = area]').remove();
         let imgSlot:HTMLSlotElement = document.createElement('slot');
@@ -14,8 +11,8 @@ class HxButton extends HxIA{
         titleSlot.setAttribute('name' , 'title');
         container.appendChild(imgSlot);
         container.appendChild(titleSlot);
-        container.appendChild(link);
         container.setAttribute('role','button');
+        this.updateStyle();
     }
 
     //custom properties getter/setter
@@ -64,7 +61,10 @@ class HxButton extends HxIA{
                 styleList = [styleList];
             }
             styleList.forEach((val , index , arr) => {
-                this.styleLinksList //TODO
+                let cntCssLink = document.createElement('link');
+                cntCssLink.rel = 'stylesheet';
+                cntCssLink.href = val;
+                this.styleLinksList.appendChild(cntCssLink);
             });
         }
         

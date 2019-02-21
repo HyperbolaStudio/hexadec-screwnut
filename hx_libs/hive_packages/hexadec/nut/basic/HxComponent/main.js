@@ -4,17 +4,18 @@ class HxComponent extends HTMLElement {
         super();
         this.componentTagName = '';
         //shadow attachment
-        this.attachShadow({ mode: 'open' });
+        let shadow = this.attachShadow({ mode: 'open' });
         //add style handler links list
         this.styleLinksList = document.createElement('div');
         this.styleLinksList.className = 'design-declaration';
+        shadow.appendChild(this.styleLinksList);
     }
 }
 class NutDesignDeclaration {
     constructor() {
         this._CSSFilesMap = new Map();
         //test code
-        this._CSSFilesMap.set('hx-button', './hx_libs/hive_packages/hexadec/nut/basic/HxButton.css');
+        this._CSSFilesMap.set('hx-button', './hx_libs/hive_packages/studio/hyperbola/plastic/nutd/HxButton.css');
         //test code end
     }
     get CSSFilesMap() {

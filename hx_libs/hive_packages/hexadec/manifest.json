@@ -1,7 +1,14 @@
 {
-    "hive":"hx_package",
-    "includePacks":[
-        "nut"
-    ],
-    "includeScripts":[]
+    "hive":"package",
+    "package":{
+        "includePacks":[
+            "nut"
+        ],
+        "includeModules":[]
+    },
+    "project":{
+        "ver":[0,0,1,"pre"],
+        "developer":"Hexadec Group",
+        "website":"https://hxd.hyperbola.studio/projects/screwnut"
+    }
 }

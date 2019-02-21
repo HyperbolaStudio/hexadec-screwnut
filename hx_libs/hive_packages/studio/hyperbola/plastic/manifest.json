@@ -1,0 +1,14 @@
+{
+    "hive":"package",
+    "package":{
+        "includePacks":[],
+        "includeModules":[
+            "css"
+        ]
+    },
+    "project":{
+        "ver":[0,0,1,"pre"],
+        "developer":"Hyperbola Studio & all contributors",
+        "website":"https://hyperbola.studio/"
+    }
+}

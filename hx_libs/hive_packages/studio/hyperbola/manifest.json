@@ -1,0 +1,7 @@
+{
+    "hive":"package",
+    "includePacks":[
+        "plastic"
+    ],
+    "includeModules":[]
+}

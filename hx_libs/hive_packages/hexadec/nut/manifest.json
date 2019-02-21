@@ -1,8 +1,11 @@
 {
-    "hive":"hx_package",
-    "includePacks":[
-        "basic",
-        "advanced"
-    ],
-    "includeScripts":[]
+    "hive":"package",
+    "package":{
+        "includePacks":[
+            "basic",
+            "advanced"
+        ],
+        "includeModules":[]
+    },
+    "requires":["/0/.basic.HxComponent"]
 }
