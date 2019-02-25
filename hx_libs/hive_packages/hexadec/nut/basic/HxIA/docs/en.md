@@ -38,7 +38,7 @@ In JavaScript:
 
 | property name | data type | default value | description |
 | ------------- | ------------------------ | ----------- | ------------- |
-| `isInline` | `boolean`                | `false` | Set whether HxIA is inline block. |
+| `inline` | `boolean`                | `false` | Set whether HxIA is inline block. |
 
 In CSS custom properties:
 
