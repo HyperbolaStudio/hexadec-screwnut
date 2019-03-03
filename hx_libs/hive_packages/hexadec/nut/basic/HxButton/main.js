@@ -57,7 +57,7 @@ class HxButton extends HxIA {
     }
     //style handler
     updateStyle() {
-        let styleList = nutStyle.CSSFilesMap.get(this.componentTagName);
+        let styleList = screwnut.nutStyle.CSSFilesMap.get(this.componentTagName);
         if (styleList) {
             if (typeof (styleList) === 'string') {
                 styleList = [styleList];

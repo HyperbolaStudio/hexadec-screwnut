@@ -22,4 +22,10 @@ class NutDesignDeclaration {
         return this._CSSFilesMap;
     }
 }
-var nutStyle = new NutDesignDeclaration();
+// var nutStyle = new NutDesignDeclaration();
+class Screwnut {
+    constructor() {
+        this.nutStyle = new NutDesignDeclaration();
+    }
+}
+var screwnut = new Screwnut();

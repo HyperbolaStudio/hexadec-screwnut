@@ -26,4 +26,8 @@ class NutDesignDeclaration{
         return this._CSSFilesMap
     }
 }
-var nutStyle = new NutDesignDeclaration();
+// var nutStyle = new NutDesignDeclaration();
+class Screwnut{
+    nutStyle:NutDesignDeclaration = new NutDesignDeclaration();
+}
+var screwnut:Screwnut = new Screwnut();
