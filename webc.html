@@ -84,95 +84,37 @@
             </div>
             <h2>Implement a button</h2>
             <div>
-                <hx-ia style="--hx-ia-act-color:var(--hx-var-color-blue)" inline>
-                    <div slot="area" style="display:inline-flex;align-items:center;padding:4px 10px">
-                        <img style="width:24px;height:24px" src="left.svg"/>
-                        <span>Prev</span>
+                    <hx-ia style="--hx-ia-act-color:var(--hx-var-color-blue)" inline>
+                        <div slot="area" style="display:inline-flex;align-items:center;padding:4px 10px">
+                            <img style="width:24px;height:24px" src="left.svg">
+                            <span>Prev</span>
+                        </div>
+                    </hx-ia>
+                    <hx-ia style="--hx-ia-act-color:var(--hx-var-color-blue)" inline>
+                        <div slot="area" style="display:inline-flex;align-items:center;padding:4px 10px">
+                            <img style="width:24px;height:24px" src="left.svg">
+                            <span>Prev</span>
+                        </div>
+                    </hx-ia>
+                    <hx-button btn-icon-src="left.svg" btn-title="block button with image" style="--hx-ia-act-color:var(--hx-var-color-darkblue);--hx-button-bgcolor:var(--hx-var-color-blue);--hx-button-fgcolor:white"></hx-button>
+                    <div role="group">
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black"></hx-button>
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" inline style="--hx-ia-act-color:var(--hx-var-color-purple);--hx-button-bgcolor:var(--hx-var-color-pink);--hx-button-fgcolor:white"></hx-button>
                     </div>
-                </hx-ia>
-                <hx-ia style="--hx-ia-act-color:var(--hx-var-color-blue)" inline>
-                    <div slot="area" style="display:inline-flex;align-items:center;padding:4px 10px">
-                        <img style="width:24px;height:24px" src="left.svg"/>
-                        <span>Prev</span>
+                    <div role="group">
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black"></hx-button>
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:row-reverse"></hx-button>
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:column"></hx-button>
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:column-reverse"></hx-button>
                     </div>
-                </hx-ia>
-                <hx-button style="--hx-ia-act-color:var(--hx-var-color-darkblue);--hx-button-bgcolor:var(--hx-var-color-blue);--hx-button-fgcolor:white">
-                    <div slot="title">
-                        block button
+                    <div role="group">
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" inline rounded icon style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black"></hx-button>
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" rounded inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black"></hx-button>
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" rounded inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:row-reverse"></hx-button>
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" rounded inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:column"></hx-button>
+                        <hx-button btn-icon-src="left.svg" btn-title="inline button with image" rounded inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:column-reverse"></hx-button>
                     </div>
-                </hx-button>
-                <div role="group" style="display:flex">
-                    <hx-button inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                    <hx-button inline style="--hx-ia-act-color:var(--hx-var-color-purple);--hx-button-bgcolor:var(--hx-var-color-pink);--hx-button-fgcolor:white">
-                        <span slot="title">
-                            inline button
-                        </span>
-                    </hx-button>
                 </div>
-                <div role="group" style="display:flex">
-                    <hx-button inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                    <hx-button inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:row-reverse">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                    <hx-button inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:column">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                    <hx-button inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:column-reverse">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                </div>
-                <div role="group" style="display:flex">
-                    <hx-button inline rounded icon  style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                    <hx-button rounded inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                    <hx-button rounded inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:row-reverse">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                    <hx-button rounded inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:column">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                    <hx-button rounded inline style="--hx-ia-act-color:var(--hx-var-color-orange);--hx-button-bgcolor:var(--hx-var-color-yellow);--hx-button-fgcolor:black;--hx-button-dir:column-reverse">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                    </hx-button>
-                </div>
-            </div>
         </div>
         <h2>TODO</h2>
             实现Title bar
@@ -181,12 +123,14 @@
                         height:48px;
                         display:flex;
                         align-items:center;
+                        justify-content: space-between;
                     }
                     .titlebar>*{
                         display:flex;
                         align-items:center;
                     }
                     .titlebar .titlegroup>h1{
+                        transition:font-size 200ms;
                         font-size:1.2em;
                         font-weight: 400;
                         margin:0;
@@ -202,12 +146,7 @@
                 </style>
         <div role="toolbar" class="titlebar" style="background:#ff0;">
             <div class="left" style="display:flex;align-items: center">
-                <hx-button inline rounded flat icon style="--hx-ia-act-color:var(--hx-var-color-orange)">
-                        <div slot="img">
-                            <img style="width:24px;height:24px" src="left.svg"/>
-                        </div>
-                        <div slot="title">inline button with image</div>
-                </hx-button>
+                <hx-button btn-icon-src="left.svg" btn-title="test" inline rounded flat icon style="--hx-ia-act-color:var(--hx-var-color-orange)"></hx-button>
                 <div class="titlegroup">
                     <h1>Title</h1>
                     <h2>SubTitle</h2>
@@ -215,6 +154,10 @@
                 
             </div>
             <div class="right">
+                <div class="btn-container">
+                    <hx-button btn-icon-src="left.svg" btn-title="test" inline rounded flat icon style="--hx-ia-act-color:var(--hx-var-color-orange)"></hx-button>
+                    <hx-button btn-icon-src="left.svg" btn-title="test" inline rounded flat icon style="--hx-ia-act-color:var(--hx-var-color-orange)"></hx-button>
+                </div>
             </div>
         </div>
     </body>

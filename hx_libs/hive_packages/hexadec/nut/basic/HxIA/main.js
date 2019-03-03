@@ -30,6 +30,7 @@ class HxIA extends HxComponent {
         areaSlot.setAttribute('name', 'area');
         container.appendChild(areaSlot);
         shadow.appendChild(container);
+        this.container = container;
     }
     static get observedAttributes() {
         return ['inline'];

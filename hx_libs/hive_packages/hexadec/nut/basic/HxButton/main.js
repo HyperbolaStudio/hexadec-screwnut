@@ -6,12 +6,12 @@ class HxButton extends HxIA {
         let shadow = this.shadowRoot;
         let container = shadow.querySelector('.container');
         container.querySelector('slot[name = area]').remove();
-        let imgSlot = document.createElement('slot');
-        imgSlot.setAttribute('name', 'img');
-        let titleSlot = document.createElement('slot');
-        titleSlot.setAttribute('name', 'title');
-        container.appendChild(imgSlot);
-        container.appendChild(titleSlot);
+        this.imgElement = document.createElement('img'); //button icon
+        this.imgElement.style.width = this.imgElement.style.height = '24px';
+        this.imgElement.style.display = 'none';
+        this.titleElement = document.createElement('div'); //button title
+        container.appendChild(this.imgElement);
+        container.appendChild(this.titleElement);
         container.setAttribute('role', 'button');
         this.updateStyle();
     }
@@ -55,6 +55,28 @@ class HxButton extends HxIA {
             this.removeAttribute(attrTarget);
         }
     }
+    get btnTitle() {
+        return this.getAttribute('btn-title');
+    }
+    set btnTitle(txt) {
+        if (txt) {
+            this.setAttribute('btn-title', txt);
+        }
+        else {
+            this.removeAttribute('btn-title');
+        }
+    }
+    get btnIconSrc() {
+        return this.getAttribute('btn-icon-src');
+    }
+    set btnIconSrc(src) {
+        if (src) {
+            this.setAttribute('btn-icon-src', src);
+        }
+        else {
+            this.removeAttribute('btn-icon-src');
+        }
+    }
     //style handler
     updateStyle() {
         let styleList = screwnut.nutStyle.CSSFilesMap.get(this.componentTagName);
@@ -63,20 +85,19 @@ class HxButton extends HxIA {
                 styleList = [styleList];
             }
             styleList.forEach((val, index, arr) => {
-                let cntCssLink = document.createElement('link');
-                cntCssLink.rel = 'stylesheet';
-                cntCssLink.href = val;
-                this.styleLinksList.appendChild(cntCssLink);
+                let cssLink = document.createElement('link');
+                cssLink.rel = 'stylesheet';
+                cssLink.href = val;
+                this.styleLinksList.appendChild(cssLink);
             });
         }
     }
     //attr listener
     static get observedAttributes() {
-        return ['inline', 'icon', 'rounded', 'flat'];
+        return ['inline', 'icon', 'rounded', 'flat', 'btn-icon-src', 'btn-title'];
     }
     attributeChangedCallback(name, oldVal, newVal) {
-        let shadow = this.shadowRoot;
-        let container = shadow.querySelector('.container');
+        let container = this.container;
         if (name === 'inline') {
             if (newVal === null) {
                 container.style.display = 'flex';
@@ -87,11 +108,11 @@ class HxButton extends HxIA {
         }
         else if (name === 'icon') {
             if (newVal === null) {
-                container.querySelector('slot[name = title]').style.display = '';
+                container.querySelector('div').style.display = '';
                 container.style.padding = '0 10px';
             }
             else {
-                container.querySelector('slot[name = title]').style.display = 'none';
+                container.querySelector('div').style.display = 'none';
                 container.style.padding = '6px';
             }
         }
@@ -109,6 +130,20 @@ class HxButton extends HxIA {
             }
             else {
                 container.classList.add('flat');
+            }
+        }
+        else if (name === 'btn-icon-src') {
+            if (newVal === null) {
+                this.imgElement.style.display = 'none';
+            }
+            else {
+                this.imgElement.style.display = '';
+                this.imgElement.src = newVal;
+            }
+        }
+        else if (name === 'btn-title') {
+            if (newVal) {
+                this.titleElement.innerText = newVal;
             }
         }
     }

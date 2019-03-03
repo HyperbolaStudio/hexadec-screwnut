@@ -1,4 +1,5 @@
 .container{
+    display:flex;
     position:relative;
     background:var(--hx-ia-bgcolor,var(--hx-global-bgcolor));
     color:var(--hx-ia-fgcolor,var(--hx-global-fgcolor));
