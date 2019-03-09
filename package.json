@@ -1,7 +1,7 @@
 {
   "name": "hexadec-screwnut",
   "version": "0.0.3",
-  "description": "A Hexadec Project library of beautiful components for front end.",
+  "description": "Library of Advanced UI Components",
   "main": "dist/bundle.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/HyperbolaStudio/hexadec-screwnut#readme",
   "devDependencies": {
-    "webpack": "^4.29.6"
+    "webpack": "^4.29.6",
+    "webpack-cli":"^3.2.3"
   }
 }
