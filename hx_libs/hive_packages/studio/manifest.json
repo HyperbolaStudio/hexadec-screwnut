@@ -1,7 +1,0 @@
-{
-    "hive":"package",
-    "includePacks":[
-        "hyperbola"
-    ],
-    "includeModules":[]
-}
