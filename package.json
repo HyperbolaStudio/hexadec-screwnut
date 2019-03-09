@@ -1,0 +1,28 @@
+{
+  "name": "hexadec-screwnut",
+  "version": "0.0.3",
+  "description": "A Hexadec Project library of beautiful components for front end.",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HyperbolaStudio/hexadec-screwnut.git"
+  },
+  "keywords": [
+    "Hexadec",
+    "Front-end",
+    "library",
+    "web-components"
+  ],
+  "author": "Hexadec Group & All Contributors",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HyperbolaStudio/hexadec-screwnut/issues"
+  },
+  "homepage": "https://github.com/HyperbolaStudio/hexadec-screwnut#readme",
+  "devDependencies": {
+    "webpack": "^4.29.6"
+  }
+}
