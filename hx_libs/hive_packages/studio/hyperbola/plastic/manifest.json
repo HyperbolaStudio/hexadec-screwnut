@@ -1,14 +1,9 @@
 {
-    "hive":"package",
+    "hive":"project",
     "package":{
         "includePacks":[],
         "includeModules":[
-            "css"
+            "nutd"
         ]
-    },
-    "project":{
-        "ver":[0,0,1,"pre"],
-        "developer":"Hyperbola Studio & all contributors",
-        "website":"https://hyperbola.studio/"
     }
 }
