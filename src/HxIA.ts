@@ -1,4 +1,5 @@
-class HxIA extends HxComponent{
+import {HxComponent} from './HxComponent';
+export class HxIA extends HxComponent{
     constructor(){
         super();
         let shadow:ShadowRoot = this.shadowRoot?this.shadowRoot:this.attachShadow({mode:'open'});

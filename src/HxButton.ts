@@ -1,4 +1,6 @@
-class HxButton extends HxIA{
+import {HxIA} from './HxIA';
+import {screwnut} from './HxComponent';
+export class HxButton extends HxIA{
     constructor(){
         super();
         this.componentTagName = 'hx-button';

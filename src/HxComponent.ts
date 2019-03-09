@@ -1,4 +1,4 @@
-class HxComponent extends HTMLElement{
+export class HxComponent extends HTMLElement{
     componentTagName:string = '';
     constructor(){
         super();
@@ -27,7 +27,6 @@ class NutDesignDeclaration{
         return this._CSSFilesMap
     }
 }
-
 class MessagePost{
     constructor(handlers:Array<(arg:any)=>any>){
         this.handlers = handlers;
@@ -78,4 +77,4 @@ class Screwnut{
         }
     }
 }
-var screwnut:Screwnut = new Screwnut();
+export var screwnut:Screwnut = new Screwnut();

@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class HxComponent extends HTMLElement {
     constructor() {
         super();
@@ -12,6 +13,7 @@ class HxComponent extends HTMLElement {
         shadow.appendChild(this.styleLinksList);
     }
 }
+exports.HxComponent = HxComponent;
 class NutDesignDeclaration {
     constructor() {
         this._CSSFilesMap = new Map();
@@ -70,4 +72,4 @@ class Screwnut {
         }
     }
 }
-var screwnut = new Screwnut();
+exports.screwnut = new Screwnut();

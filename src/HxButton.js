@@ -1,5 +1,8 @@
 "use strict";
-class HxButton extends HxIA {
+Object.defineProperty(exports, "__esModule", { value: true });
+const HxIA_1 = require("./HxIA");
+const HxComponent_1 = require("./HxComponent");
+class HxButton extends HxIA_1.HxIA {
     constructor() {
         super();
         this.componentTagName = 'hx-button';
@@ -79,7 +82,7 @@ class HxButton extends HxIA {
     }
     //style handler
     updateStyle() {
-        let styleList = screwnut.nutStyle.CSSFilesMap.get(this.componentTagName);
+        let styleList = HxComponent_1.screwnut.nutStyle.CSSFilesMap.get(this.componentTagName);
         if (styleList) {
             if (typeof (styleList) === 'string') {
                 styleList = [styleList];
@@ -148,4 +151,5 @@ class HxButton extends HxIA {
         }
     }
 }
+exports.HxButton = HxButton;
 customElements.define('hx-button', HxButton);
