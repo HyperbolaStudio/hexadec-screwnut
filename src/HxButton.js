@@ -1,8 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const HxIA_1 = require("./HxIA");
-const HxComponent_1 = require("./HxComponent");
-class HxButton extends HxIA_1.HxIA {
+import { HxIA } from './HxIA';
+import { HxComponent } from './HxComponent';
+export class HxButton extends HxIA {
     constructor() {
         super();
         this.componentTagName = 'hx-button';
@@ -10,7 +8,6 @@ class HxButton extends HxIA_1.HxIA {
         // let container:any = shadow.querySelector('.container');
         this.areaSlot.remove();
         this.imgElement = document.createElement('img'); //button icon
-        //this.imgElement.style.width = this.imgElement.style.height = '24px';
         this.imgElement.className = 'icon-elem';
         this.imgElement.style.display = 'none';
         this.titleElement = document.createElement('div'); //button title
@@ -84,7 +81,7 @@ class HxButton extends HxIA_1.HxIA {
     }
     //style handler
     updateStyle() {
-        let styleList = HxComponent_1.HxComponent.nutStyle.CSSFilesMap.get(this.componentTagName);
+        let styleList = HxComponent.nutStyle.CSSFilesMap.get(this.componentTagName);
         if (styleList) {
             if (typeof (styleList) === 'string') {
                 styleList = [styleList];
@@ -135,5 +132,4 @@ class HxButton extends HxIA_1.HxIA {
         }
     }
 }
-exports.HxButton = HxButton;
 customElements.define('hx-button', HxButton);

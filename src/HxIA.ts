@@ -2,6 +2,7 @@ import {HxComponent} from './HxComponent';
 export class HxIA extends HxComponent{
     constructor(){
         super();
+        //fuck types
         let shadow:ShadowRoot = this.shadowRoot?this.shadowRoot:this.attachShadow({mode:'open'});
         if(this.shadowRoot){
             shadow = this.shadowRoot

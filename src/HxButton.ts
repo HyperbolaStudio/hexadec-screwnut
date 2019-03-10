@@ -9,7 +9,6 @@ export class HxButton extends HxIA{
         this.areaSlot.remove();
 
         this.imgElement = document.createElement('img');//button icon
-        //this.imgElement.style.width = this.imgElement.style.height = '24px';
         this.imgElement.className = 'icon-elem';
         this.imgElement.style.display = 'none';
 

@@ -1,9 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const HxComponent_1 = require("./HxComponent");
-class HxIA extends HxComponent_1.HxComponent {
+import { HxComponent } from './HxComponent';
+export class HxIA extends HxComponent {
     constructor() {
         super();
+        //fuck types
         let shadow = this.shadowRoot ? this.shadowRoot : this.attachShadow({ mode: 'open' });
         if (this.shadowRoot) {
             shadow = this.shadowRoot;
@@ -45,5 +44,4 @@ class HxIA extends HxComponent_1.HxComponent {
         }
     }
 }
-exports.HxIA = HxIA;
 customElements.define('hx-ia', HxIA);

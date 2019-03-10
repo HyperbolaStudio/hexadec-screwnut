@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 class NutDesignDeclaration {
     constructor() {
         this._CSSFilesMap = new Map();
@@ -34,7 +32,7 @@ class MessagePost {
         }
     }
 }
-class HxComponent extends HTMLElement {
+export class HxComponent extends HTMLElement {
     constructor() {
         super();
         this.componentTagName = '';
@@ -51,7 +49,7 @@ class HxComponent extends HTMLElement {
         (function dfs(root) {
             root.querySelectorAll(selector).forEach((elem, i, list) => {
                 if (elem instanceof HxComponent && elem.receiver.has(message)) {
-                    funcArr.push(elem.receiver.get(message) || ((arg) => { }));
+                    funcArr.push(arg => (elem.receiver.get(message) || ((arg) => { }))(arg));
                 }
                 if (shadowPenetrate && elem.shadowRoot) {
                     dfs(elem.shadowRoot);
@@ -62,9 +60,8 @@ class HxComponent extends HTMLElement {
     }
     static post(message, target) {
         if (target.receiver.has(message)) {
-            return new MessagePost([target.receiver.get('message') || ((arg) => { })]);
+            return new MessagePost([arg => (target.receiver.get('message') || ((arg) => { }))(arg)]);
         }
     }
 }
 HxComponent.nutStyle = new NutDesignDeclaration();
-exports.HxComponent = HxComponent;

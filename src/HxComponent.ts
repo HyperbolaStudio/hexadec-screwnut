@@ -50,6 +50,7 @@ export class HxComponent extends HTMLElement{
     styleLinksList:HTMLDivElement;
     receiver:Map<any,(arg:any)=>any> = new Map<any,(arg:any)=>any>();
     static nutStyle:NutDesignDeclaration = new NutDesignDeclaration();
+    
     static broadcast(
         message:any,
         context:ShadowRoot|HTMLDocument|HTMLElement = document,
@@ -60,7 +61,7 @@ export class HxComponent extends HTMLElement{
         (function dfs(root:ShadowRoot|HTMLDocument|HTMLElement):void{
             root.querySelectorAll(selector).forEach((elem,i,list)=>{
                 if(elem instanceof HxComponent && elem.receiver.has(message)){
-                    funcArr.push(elem.receiver.get(message)||((arg:any)=>{}));
+                    funcArr.push(arg=>(elem.receiver.get(message)||((arg:any)=>{}))(arg))
                 }
                 if(shadowPenetrate && elem.shadowRoot){
                     dfs(elem.shadowRoot);
@@ -71,7 +72,7 @@ export class HxComponent extends HTMLElement{
     }
     static post(message:any,target:HxComponent):MessagePost|void{
         if(target.receiver.has(message)){
-            return new MessagePost([target.receiver.get('message')||((arg:any)=>{})]);
+            return new MessagePost([arg=>(target.receiver.get('message')||((arg:any)=>{}))(arg)]);
         }
     }
 }
