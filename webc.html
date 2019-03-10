@@ -4,9 +4,10 @@
         <title>Web Component Demo</title>
         <script src="has_custom_element.js"></script>
         <script src="webcomponents-bundle.js"></script>
-        <script src="./hx_libs/hive_packages/hexadec/nut/basic/HxComponent/main.js"></script>
+        <script src="dist/bundle.js"></script>
+        <!-- <script src="./hx_libs/hive_packages/hexadec/nut/basic/HxComponent/main.js"></script>
         <script src="./hx_libs/hive_packages/hexadec/nut/basic/HxIA/main.js"></script>
-        <script src="./hx_libs/hive_packages/hexadec/nut/basic/HxButton/main.js"></script>
+        <script src="./hx_libs/hive_packages/hexadec/nut/basic/HxButton/main.js"></script> -->
         <!-- <script src="./.hx-libs/hivepack.js"></script> -->
         <link rel="stylesheet" href="color.css">
         <style>
@@ -125,7 +126,7 @@
                         align-items:center;
                         justify-content: space-between;
                     }
-                    .titlebar>*{
+                    .titlebar>.left,.titlebar>.right,.titlebar .btn-container{
                         display:flex;
                         align-items:center;
                     }
@@ -141,7 +142,7 @@
                         margin:0;
                     }
                     .titlebar .titlegroup>h1:last-child{
-                        font-size:1.6em !important;
+                        font-size:1.6em;
                     }
                 </style>
         <div role="toolbar" class="titlebar" style="background:#ff0;">

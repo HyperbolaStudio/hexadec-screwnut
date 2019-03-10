@@ -1,22 +1,24 @@
 import {HxIA} from './HxIA';
-import {screwnut} from './HxComponent';
+import {HxComponent} from './HxComponent';
 export class HxButton extends HxIA{
     constructor(){
         super();
         this.componentTagName = 'hx-button';
         let shadow:any = this.shadowRoot;
-        let container:any = shadow.querySelector('.container');
-        container.querySelector('slot[name = area]').remove();
+        // let container:any = shadow.querySelector('.container');
+        this.areaSlot.remove();
 
         this.imgElement = document.createElement('img');//button icon
-        this.imgElement.style.width = this.imgElement.style.height = '24px';
+        //this.imgElement.style.width = this.imgElement.style.height = '24px';
+        this.imgElement.className = 'icon-elem';
         this.imgElement.style.display = 'none';
 
         this.titleElement = document.createElement('div');//button title
+        this.titleElement.className = 'title-elem';
 
-        container.appendChild(this.imgElement);
-        container.appendChild(this.titleElement);
-        container.setAttribute('role','button');
+        this.container.appendChild(this.imgElement);
+        this.container.appendChild(this.titleElement);
+        this.container.setAttribute('role','button');
         this.updateStyle();
     }
 
@@ -100,7 +102,7 @@ export class HxButton extends HxIA{
     }
     //style handler
     updateStyle():void{
-        let styleList:string|string[]|undefined = screwnut.nutStyle.CSSFilesMap.get(this.componentTagName);
+        let styleList:string|string[]|undefined = HxComponent.nutStyle.CSSFilesMap.get(this.componentTagName);
         if(styleList){
             if(typeof(styleList) === 'string'){
                 styleList = [styleList];
@@ -121,37 +123,22 @@ export class HxButton extends HxIA{
     }
     attributeChangedCallback(name:string , oldVal:string , newVal:string){
         let container:any = this.container;
-        if(name === 'inline'){
-            if(newVal === null){
-                container.style.display = 'flex';
-            }else{
-                container.style.display = 'inline-flex';
+        let containerClass:DOMTokenList = this.container.classList;
+        //style-alike attr handler
+        for(let attr of HxButton.observedAttributes){
+            if(name === 'btn-icon-src' || name === 'btn-title'){
+                break;
             }
-
-        }else if(name === 'icon'){
-            if(newVal === null){
-                container.querySelector('div').style.display = '';
-                container.style.padding = '0 10px';
-            }else{
-                container.querySelector('div').style.display = 'none';
-                container.style.padding = '6px';
+            if(name === attr){
+                if(newVal === null){
+                    containerClass.remove(attr);
+                }else{
+                    containerClass.add(attr);
+                }
+                break;
             }
-
-        }else if(name === 'rounded'){
-            if(newVal === null){
-                container.style.borderRadius = '2px';
-            }else{
-                container.style.borderRadius = '36px';
-            }
-
-        }else if(name === 'flat'){
-            if(newVal === null){
-                container.classList.remove('flat');
-            }else{
-                container.classList.add('flat');
-            }
-
-        }else if(name === 'btn-icon-src'){
+        }
+        if(name === 'btn-icon-src'){
             if(newVal === null){
                 this.imgElement.style.display = 'none';
             }else{

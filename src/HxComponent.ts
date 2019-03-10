@@ -1,26 +1,8 @@
-export class HxComponent extends HTMLElement{
-    componentTagName:string = '';
-    constructor(){
-        super();
-
-        //shadow attachment
-        let shadow:ShadowRoot = this.attachShadow({mode:'open'});
-
-        //add style handler links list
-        this.styleLinksList = document.createElement('div');
-        this.styleLinksList.className = 'design-declaration';
-
-        shadow.appendChild(this.styleLinksList);
-        
-    }
-    styleLinksList:HTMLDivElement;
-    receiver:Map<any,(arg:any)=>any> = new Map<any,(arg:any)=>any>();
-}
 class NutDesignDeclaration{
     _CSSFilesMap:Map<string,string|string[]> = new Map();
     constructor(){
         //test code
-        this._CSSFilesMap.set('hx-button','./hx_libs/hive_packages/studio/hyperbola/plastic/nutd/HxButton.css')
+        this._CSSFilesMap.set('hx-button','./src/studio/hyperbola/plastic/nutd/HxButton.css')
         //test code end
     }
     get CSSFilesMap():Map<string,string|string[]>{
@@ -50,9 +32,25 @@ class MessagePost{
         }
     }
 }
-class Screwnut{
-    nutStyle:NutDesignDeclaration = new NutDesignDeclaration();
-    broadcast(
+export class HxComponent extends HTMLElement{
+    componentTagName:string = '';
+    constructor(){
+        super();
+
+        //shadow attachment
+        let shadow:ShadowRoot = this.attachShadow({mode:'open'});
+
+        //add style handler links list
+        this.styleLinksList = document.createElement('div');
+        this.styleLinksList.className = 'design-declaration';
+
+        shadow.appendChild(this.styleLinksList);
+        
+    }
+    styleLinksList:HTMLDivElement;
+    receiver:Map<any,(arg:any)=>any> = new Map<any,(arg:any)=>any>();
+    static nutStyle:NutDesignDeclaration = new NutDesignDeclaration();
+    static broadcast(
         message:any,
         context:ShadowRoot|HTMLDocument|HTMLElement = document,
         selector:string = '*',
@@ -71,10 +69,9 @@ class Screwnut{
         })(context);
         return new MessagePost(funcArr);
     }
-    post(message:any,target:HxComponent):MessagePost|void{
+    static post(message:any,target:HxComponent):MessagePost|void{
         if(target.receiver.has(message)){
             return new MessagePost([target.receiver.get('message')||((arg:any)=>{})]);
         }
     }
 }
-export var screwnut:Screwnut = new Screwnut();
