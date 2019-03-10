@@ -2,9 +2,10 @@
   "name": "hexadec-screwnut",
   "version": "0.0.3",
   "description": "Library of Advanced UI Components",
-  "main": "dist/bundle.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"webpack"
   },
   "repository": {
     "type": "git",
