@@ -1,36 +1,21 @@
-class HxIA extends HxComponent{
+import {HxComponent} from './HxComponent';
+export class HxIA extends HxComponent{
     constructor(){
         super();
+        //fuck types
         let shadow:ShadowRoot = this.shadowRoot?this.shadowRoot:this.attachShadow({mode:'open'});
         if(this.shadowRoot){
             shadow = this.shadowRoot
         };
-        let container:HTMLDivElement = document.createElement('div');
-        container.className = 'container';
-        // this.createStyle(`
-        //     .container{
-        //         position:relative;
-        //         background:var(--hx-ia-bgcolor,var(--hx-global-bgcolor));
-        //         color:var(--hx-ia-fgcolor,var(--hx-global-fgcolor));
-        //         border:none;
-        //         transition:box-shadow 0.2s,border 0.2s;
-        //     }
-        //     @media(min-width:800px){
-        //         .container:hover{
-        //             box-shadow:0 0 1px 1px var(--hx-ia-act-color,var(--hx-global-theme-secondary-color)) !important;
-        //         }
-        //     }
-        //     .container:active{
-        //         box-shadow:0 0 4px 1px var(--hx-ia-act-color,var(--hx-global-theme-secondary-color)) !important;
-        //     }
-        // `);
-        let areaSlot:HTMLSlotElement = document.createElement('slot');
-        areaSlot.setAttribute('name' , 'area');
-        container.appendChild(areaSlot);
-        shadow.appendChild(container);
-        this.container = container;
+        this.container = document.createElement('div');
+        this.container.className = 'container';
+        this.areaSlot = document.createElement('slot');
+        this.areaSlot.setAttribute('name' , 'area');
+        this.container.appendChild(this.areaSlot);
+        shadow.appendChild(this.container);
     }
     container:HTMLDivElement;
+    areaSlot:HTMLSlotElement;
     static get observedAttributes():string[]{
         return ['inline'];
     }
