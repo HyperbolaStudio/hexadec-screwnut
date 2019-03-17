@@ -2,7 +2,7 @@ class NutDesignDeclaration{
     _CSSFilesMap:Map<string,string|string[]> = new Map();
     constructor(){
         //test code
-        this._CSSFilesMap.set('hx-button','./src/studio/hyperbola/plastic/nutd/HxButton.css')
+        this._CSSFilesMap.set('HX-BUTTON','./src/studio/hyperbola/plastic/nutd/HxButton.css')
         //test code end
     }
     get CSSFilesMap():Map<string,string|string[]>{
@@ -45,6 +45,21 @@ export class HxComponent extends HTMLElement{
         this.styleLinksList.className = 'design-declaration';
 
         shadow.appendChild(this.styleLinksList);
+        
+    }
+    updateStyle():void{
+        let styleList:string|string[]|undefined = HxComponent.nutStyle.CSSFilesMap.get(this.tagName);
+        if(styleList){
+            if(typeof(styleList) === 'string'){
+                styleList = [styleList];
+            }
+            styleList.forEach((val , index , arr) => {
+                let cssLink = document.createElement('link');
+                cssLink.rel = 'stylesheet';
+                cssLink.href = val;
+                this.styleLinksList.appendChild(cssLink);
+            });
+        }
         
     }
     styleLinksList:HTMLDivElement;

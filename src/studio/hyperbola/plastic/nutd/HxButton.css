@@ -21,6 +21,7 @@
     align-items:center;
     flex-direction:var(--hx-button-dir);
     user-select: none;
+    outline: none;
 }
 .container>.icon-elem{
     width:var(--icon-size);

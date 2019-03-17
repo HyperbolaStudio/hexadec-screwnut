@@ -1,15 +1,17 @@
 import {HxInteractionTarget} from './HxInteractionTarget';
 import {HxComponent} from './HxComponent';
+import { HxButtonBuilder } from './HxButtonBuilder';
 export class HxButton extends HxInteractionTarget{
     constructor(){
         super();
-        this.componentTagName = 'hx-button';
-        let shadow:any = this.shadowRoot;
+        // console.log(this.tagName);
+        // this.componentTagName = 'hx-button';
+        // let shadow:any = this.shadowRoot;
         // let container:any = shadow.querySelector('.container');
-        this.areaSlot.remove();
+        // this.areaSlot.remove();
 
         // this.container = document.createElement('button');
-
+        this.container.tabIndex=0;
         this.imgElement = document.createElement('img');//button icon
         this.imgElement.className = 'icon-elem';
         this.imgElement.style.display = 'none';
@@ -38,6 +40,18 @@ export class HxButton extends HxInteractionTarget{
     titleElement:HTMLDivElement;
 
     //custom properties getter/setter
+    get inline():boolean{
+        let attrTarget:string = 'inline';
+        return this.getAttribute(attrTarget) !== null;
+    }
+    set inline(is:boolean){
+        let attrTarget:string = 'inline';
+        if(is){
+            this.setAttribute(attrTarget,'');
+        }else{
+            this.removeAttribute(attrTarget);
+        }
+    }
 
     get flat():boolean{
         let attrTarget:string = 'flat';
@@ -102,21 +116,7 @@ export class HxButton extends HxInteractionTarget{
         
     }
     //style handler
-    updateStyle():void{
-        let styleList:string|string[]|undefined = HxComponent.nutStyle.CSSFilesMap.get(this.componentTagName);
-        if(styleList){
-            if(typeof(styleList) === 'string'){
-                styleList = [styleList];
-            }
-            styleList.forEach((val , index , arr) => {
-                let cssLink = document.createElement('link');
-                cssLink.rel = 'stylesheet';
-                cssLink.href = val;
-                this.styleLinksList.appendChild(cssLink);
-            });
-        }
-        
-    }
+    
     
     //attr listener
     static get observedAttributes():string[]{
@@ -152,6 +152,12 @@ export class HxButton extends HxInteractionTarget{
             this.titleElement.textContent = newVal;
             
         }
+    }
+    build(b:HxButtonBuilder){
+        let btn:any = this;
+        btn.btnTitle = b.btnTitle;
+        btn.btnIconSrc = b.btnIconSrc||null;
+        btn.onclick = b.onclick;  
     }
 }
 customElements.define('hx-button' , HxButton);

@@ -1,9 +1,7 @@
 class NutDesignDeclaration {
     constructor() {
         this._CSSFilesMap = new Map();
-        //test code
-        this._CSSFilesMap.set('hx-button', './src/studio/hyperbola/plastic/nutd/HxButton.css');
-        //test code end
+        this._CSSFilesMap.set('HX-BUTTON', './src/studio/hyperbola/plastic/nutd/HxButton.css');
     }
     get CSSFilesMap() {
         return this._CSSFilesMap;
@@ -37,12 +35,24 @@ export class HxComponent extends HTMLElement {
         super();
         this.componentTagName = '';
         this.receiver = new Map();
-        //shadow attachment
         let shadow = this.attachShadow({ mode: 'open' });
-        //add style handler links list
         this.styleLinksList = document.createElement('div');
         this.styleLinksList.className = 'design-declaration';
         shadow.appendChild(this.styleLinksList);
+    }
+    updateStyle() {
+        let styleList = HxComponent.nutStyle.CSSFilesMap.get(this.tagName);
+        if (styleList) {
+            if (typeof (styleList) === 'string') {
+                styleList = [styleList];
+            }
+            styleList.forEach((val, index, arr) => {
+                let cssLink = document.createElement('link');
+                cssLink.rel = 'stylesheet';
+                cssLink.href = val;
+                this.styleLinksList.appendChild(cssLink);
+            });
+        }
     }
     static broadcast(message, context = document, selector = '*', shadowPenetrate) {
         let funcArr = [];

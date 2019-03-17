@@ -1,6 +1,8 @@
 import {HxComponent} from './HxComponent';
 import {HxAlertBuilder,EmotionTypes} from './HxAlertBuilder';
-export class HxAlertBar extends HxComponent{
+import {HxButton} from './HxButton'
+import { HxButtonBuilder } from './HxButtonBuilder';
+export class HxAlert extends HxComponent{
     constructor(){
         super();
     }
@@ -8,7 +10,6 @@ export class HxAlertBar extends HxComponent{
     titleElement:HTMLDivElement = document.createElement('div');
     detailElement:HTMLDivElement = document.createElement('div');
     buttonContainer:HTMLDivElement = document.createElement('div');
-    
     //MVVM getter/setter
     _emotion:keyof EmotionTypes = 'none';
     set alertTitle(title:string){
@@ -44,11 +45,18 @@ export class HxAlertBar extends HxComponent{
             this.iconElement.style.display = 'none';
         }
     }
-
-    build(builder:HxAlertBuilder):void{
+    _build(builder:HxAlertBuilder):void{
         this.alertEmotion = builder.emotion||'none';
         this.alertTitle = builder.title;
         this.alertDetail = builder.detail||null;
         this.alertIconSrc = builder.iconSrc||null;
+        if(builder.buttons){
+            for(let b of builder.buttons){
+                let btn:any = document.createElement('hx-button');
+                btn.build(b);
+                this.buttonContainer.appendChild(btn);
+            }
+        }
+        
     }
 }
