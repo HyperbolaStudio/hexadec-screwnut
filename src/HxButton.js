@@ -1,12 +1,13 @@
-import { HxIA } from './HxIA';
+import { HxInteractionTarget } from './HxInteractionTarget';
 import { HxComponent } from './HxComponent';
-export class HxButton extends HxIA {
+export class HxButton extends HxInteractionTarget {
     constructor() {
         super();
         this.componentTagName = 'hx-button';
         let shadow = this.shadowRoot;
         // let container:any = shadow.querySelector('.container');
         this.areaSlot.remove();
+        // this.container = document.createElement('button');
         this.imgElement = document.createElement('img'); //button icon
         this.imgElement.className = 'icon-elem';
         this.imgElement.style.display = 'none';
@@ -119,6 +120,7 @@ export class HxButton extends HxIA {
         if (name === 'btn-icon-src') {
             if (newVal === null) {
                 this.imgElement.style.display = 'none';
+                this.imgElement.src = '';
             }
             else {
                 this.imgElement.style.display = '';
@@ -126,9 +128,7 @@ export class HxButton extends HxIA {
             }
         }
         else if (name === 'btn-title') {
-            if (newVal) {
-                this.titleElement.innerText = newVal;
-            }
+            this.titleElement.textContent = newVal;
         }
     }
 }

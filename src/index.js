@@ -1,3 +1,3 @@
 import {HxComponent,screwnut} from './HxComponent';
-import {HxIA} from './HxIA';
+import {HxInteractionTarget} from './HxInteractionTarget';
 import {HxButton} from './HxButton';

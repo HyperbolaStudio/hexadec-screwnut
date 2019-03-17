@@ -1,5 +1,5 @@
 import {HxComponent} from './HxComponent';
-export class HxIA extends HxComponent{
+export class HxInteractionTarget extends HxComponent{
     constructor(){
         super();
         //fuck types
@@ -14,7 +14,7 @@ export class HxIA extends HxComponent{
         this.container.appendChild(this.areaSlot);
         shadow.appendChild(this.container);
     }
-    container:HTMLDivElement;
+    container:HTMLElement;
     areaSlot:HTMLSlotElement;
     static get observedAttributes():string[]{
         return ['inline'];
@@ -43,4 +43,4 @@ export class HxIA extends HxComponent{
         }
     }
 }
-customElements.define('hx-ia',HxIA);
+// customElements.define('hx-ia',HxInteractionTarget);

@@ -26,6 +26,9 @@
     width:var(--icon-size);
     height:var(--icon-size);
 }
+.container>.title-elem{
+    font:16px;
+}
 .container.flat{
     box-shadow:none;
 }
