@@ -1,6 +1,7 @@
 import {HxInteractionTarget} from './HxInteractionTarget';
-import {HxComponent} from './HxComponent';
+import {HxComponent,Component} from './HxComponent';
 import { HxButtonBuilder } from './HxButtonBuilder';
+@Component('hx-button')
 export class HxButton extends HxInteractionTarget{
     constructor(){
         super();
@@ -160,4 +161,4 @@ export class HxButton extends HxInteractionTarget{
         btn.onclick = b.onclick;  
     }
 }
-customElements.define('hx-button' , HxButton);
+// customElements.define('hx-button' , HxButton);

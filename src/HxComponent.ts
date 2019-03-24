@@ -9,31 +9,48 @@ class NutDesignDeclaration{
         return this._CSSFilesMap
     }
 }
-class MessagePost{
-    constructor(handlers:Array<(arg:any)=>any>){
-        this.handlers = handlers;
-    }
-    handlers:Array<(arg:any)=>any>;
-    emit(arg?:any,async:boolean = true):Promise<any>/*async*/|Array<any>{
-        if(async){
-            let handlerPromises:Array<Promise<any>> = [];
-            this.handlers.forEach((func,i,arr)=>{
-                handlerPromises.push(new Promise<any>((result,reject)=>{
-                    result(func(arg));
-                }));
-            });
-            return Promise.all(handlerPromises);
-        }else{
-            let handlerResults:Array<any> = [];
-            this.handlers.forEach((func,i,arr)=>{
-                handlerResults.push(func(arg));
-            })
-            return handlerResults;
-        }
+
+//decorators
+export function Component<K extends HxComponent>(tagName:string){
+    return (target:(new() => K)) => {
+        customElements.define(tagName,target);
     }
 }
-export class HxComponent extends HTMLElement{
-    componentTagName:string = '';
+interface ViewModel{
+    tagName:string;
+    revealElemSlotName?:string;
+    classList?:Array<string>;
+    attr?:{
+        [property:string]:string;
+    }
+    style?:{
+        [property:string]:string;
+    }
+    DOMSlot?:{
+        [property:string]:string;
+    }
+    ElemSlot?:{
+        [property:string]:ViewModel|HTMLElement;
+    }
+    child?:Array<ViewModel> 
+}
+interface SlotDeclaration{
+    targetElem:HTMLElement;
+    type:'attr'|'classList'|'style'|'DOMSlot'|'ElemSlot'|'self';
+    targetName?:string;
+}
+interface Slotable{
+      DOMSlotMap:Map<string,Array<SlotDeclaration>>;
+      container:HTMLElement;
+}
+export function View(model:ViewModel,containerTarget?:string){
+    return (target:(new() => Slotable)) => {
+        
+    }
+}
+export class HxComponent extends HTMLElement  implements Slotable{
+    DOMSlotMap: Map<string, SlotDeclaration[]> = new Map();
+    container: HTMLElement = document.createElement('div');
     constructor(){
         super();
 
@@ -63,31 +80,6 @@ export class HxComponent extends HTMLElement{
         
     }
     styleLinksList:HTMLDivElement;
-    receiver:Map<any,(arg:any)=>any> = new Map<any,(arg:any)=>any>();
+    // receiver:Map<any,(arg:any)=>any> = new Map<any,(arg:any)=>any>();
     static nutStyle:NutDesignDeclaration = new NutDesignDeclaration();
-    
-    static broadcast(
-        message:any,
-        context:ShadowRoot|HTMLDocument|HTMLElement = document,
-        selector:string = '*',
-        shadowPenetrate:boolean
-    ):MessagePost{
-        let funcArr:Array<(arg:any)=>any> = [];
-        (function dfs(root:ShadowRoot|HTMLDocument|HTMLElement):void{
-            root.querySelectorAll(selector).forEach((elem,i,list)=>{
-                if(elem instanceof HxComponent && elem.receiver.has(message)){
-                    funcArr.push(arg=>(elem.receiver.get(message)||((arg:any)=>{}))(arg))
-                }
-                if(shadowPenetrate && elem.shadowRoot){
-                    dfs(elem.shadowRoot);
-                }
-            })
-        })(context);
-        return new MessagePost(funcArr);
-    }
-    static post(message:any,target:HxComponent):MessagePost|void{
-        if(target.receiver.has(message)){
-            return new MessagePost([arg=>(target.receiver.get('message')||((arg:any)=>{}))(arg)]);
-        }
-    }
 }

@@ -1,5 +1,13 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var HxButton_1;
 import { HxInteractionTarget } from './HxInteractionTarget';
-export class HxButton extends HxInteractionTarget {
+import { Component } from './HxComponent';
+let HxButton = HxButton_1 = class HxButton extends HxInteractionTarget {
     constructor() {
         super();
         this.container.tabIndex = 0;
@@ -93,7 +101,7 @@ export class HxButton extends HxInteractionTarget {
     attributeChangedCallback(name, oldVal, newVal) {
         let container = this.container;
         let containerClass = this.container.classList;
-        for (let attr of HxButton.observedAttributes) {
+        for (let attr of HxButton_1.observedAttributes) {
             if (name === 'btn-icon-src' || name === 'btn-title') {
                 break;
             }
@@ -127,5 +135,8 @@ export class HxButton extends HxInteractionTarget {
         btn.btnIconSrc = b.btnIconSrc || null;
         btn.onclick = b.onclick;
     }
-}
-customElements.define('hx-button', HxButton);
+};
+HxButton = HxButton_1 = __decorate([
+    Component('hx-button')
+], HxButton);
+export { HxButton };
