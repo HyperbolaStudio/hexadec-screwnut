@@ -12,16 +12,15 @@ export function Component(tagName) {
         customElements.define(tagName, target);
     };
 }
-export function View(model, containerTarget) {
+export function View(model, containerTargetSlot) {
     return (target) => {
         let buildPos;
-        if (containerTarget) {
-            buildPos = target.prototype.get(containerTarget) || target.prototype.container;
+        if (containerTargetSlot) {
+            buildPos = target.prototype.get(containerTargetSlot) || target.prototype.container;
         }
         else {
             buildPos = target.prototype.container;
         }
-        let buildTarget;
         function build(n) {
             let elem = document.createElement(n.tagName);
             if (n.attr) {
@@ -31,7 +30,13 @@ export function View(model, containerTarget) {
             }
             if (n.style) {
                 for (let k in n.style) {
-                    elem.style[k] = n.style[k] || '';
+                    let v = n.style[k];
+                    if (typeof (v) === 'string') {
+                        elem.style.setProperty(k, v);
+                    }
+                    else {
+                        elem.style.setProperty(k, v.value, v.important ? 'important' : null);
+                    }
                 }
             }
             if (n.DOMSlot && elem instanceof HxComponent) {
@@ -46,6 +51,7 @@ export function View(model, containerTarget) {
             }
             return elem;
         }
+        buildPos.appendChild(build(model));
     };
 }
 let x = {

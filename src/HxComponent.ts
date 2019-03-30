@@ -23,7 +23,7 @@ export function Component<K extends HxComponent>(tagName:string){
 
 
 //view builder
-interface ViewModel{
+interface HxNodeModel{
     tagName:string;
     revealElemSlotName?:string;
     classList?:Array<string>;
@@ -31,15 +31,15 @@ interface ViewModel{
         [property:string]:string;
     }
     style?:{
-        [P in keyof CSSStyleDeclaration]?:CSSStyleDeclaration[P];
+        [property:string]:string|{value:string;important:boolean};
     }
     DOMSlot?:{
         [property:string]:string;
     }
     ElemSlot?:{
-        [property:string]:ViewModel|HTMLElement;
+        [property:string]:HxNodeModel|HTMLElement;
     }
-    child?:Array<ViewModel> 
+    child?:Array<HxNodeModel> 
 }
 //store slots in slot map of slotable
 interface SlotDeclaration{
@@ -53,16 +53,16 @@ interface Slotable{
       container:HTMLElement;
       _setDOMSlot:(slotName:string,value:string) => void;
 }
-export function View(model:ViewModel,containerTarget?:string){
+export function View(model:HxNodeModel,containerTargetSlot?:string){
     return (target:(new() => Slotable)) => {
         let buildPos:HTMLElement;//position to build the view model
-        if(containerTarget){
-            buildPos = target.prototype.get(containerTarget) || target.prototype.container;
+        if(containerTargetSlot){
+            buildPos = target.prototype.get(containerTargetSlot) || target.prototype.container;
         }else{
             buildPos = target.prototype.container;
         }
-        let buildTarget:HTMLElement;//built model
-        function build(n:ViewModel):HTMLElement{
+        // let builtTarget:HTMLElement;//built model
+        function build(n:HxNodeModel):HTMLElement{
             let elem = document.createElement(n.tagName);
             if(n.attr){
                 for(let k in n.attr){
@@ -71,7 +71,12 @@ export function View(model:ViewModel,containerTarget?:string){
             }
             if(n.style){
                 for(let k in n.style){
-                    elem.style[k] = n.style[k]||'';
+                    let v = n.style[k];
+                    if(typeof(v) === 'string'){
+                        elem.style.setProperty(k,v);
+                    }else{
+                        elem.style.setProperty(k,v.value,v.important?'important':null);
+                    }
                 }
             }
             if(n.DOMSlot && elem instanceof HxComponent){
@@ -86,9 +91,10 @@ export function View(model:ViewModel,containerTarget?:string){
             }
             return elem;
         }
+        buildPos.appendChild(build(model));
     }
 }
-let x:ViewModel = {
+let x:HxNodeModel = {
     tagName:'div',
     style:{
         lineHeight:'10px',
