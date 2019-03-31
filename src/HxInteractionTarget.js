@@ -12,3 +12,4 @@ export class HxInteractionTarget extends HxComponent {
         shadow.appendChild(this.container);
     }
 }
+//# sourceMappingURL=HxInteractionTarget.js.map

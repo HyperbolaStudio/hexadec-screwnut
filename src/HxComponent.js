@@ -160,3 +160,4 @@ XTest = __decorate([
         },
     })
 ], XTest);
+//# sourceMappingURL=HxComponent.js.map

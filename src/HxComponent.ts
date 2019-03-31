@@ -41,7 +41,7 @@ interface HxNodeModel{//Build node target
     }
     child?:Array<HxNodeModel> 
 }
-interface SlotHandler{
+interface SlotHandler{//getter and setter via slot
     attr:{
         setter:(attr:string) => void;
         getter:() => string|null;
@@ -60,6 +60,7 @@ interface SlotDeclaration{
     type:keyof SlotHandler;
     targetName:string;
 }
+//implementation of SlotHandler
 function getSlotHandler (slot:SlotDeclaration):SlotHandler {
     let handler:SlotHandler = {
         attr:{
@@ -91,12 +92,15 @@ interface Slotable{
       DOMSlotMap:Map<string,SlotDeclaration>;
       container:HTMLElement;
 }
+//setter of slot declaration
 function setSlot(slotMap:Map<string,SlotDeclaration>,slotName:string,slot:SlotDeclaration){
     slotMap.set(slotName,slot);
 }
+//getter of sloy declaration
 function getSlot(slotMap:Map<string,SlotDeclaration>,slotName:string){
     return slotMap.get(slotName);
 }
+//set slot value via slot
 function slotIn(slotMap:Map<string,SlotDeclaration>,key:string,value:string,priority?:'important'){
     let slot = slotMap.get(key);
     if(slot){
@@ -109,6 +113,7 @@ function slotIn(slotMap:Map<string,SlotDeclaration>,key:string,value:string,prio
         }
     }
 }
+//TODO add a slot setter as a union type with string
 function build(n:HxNodeModel,target:new()=>Slotable):HTMLElement{
     let elem = document.createElement(n.tagName);
     if(n.attr){
@@ -120,15 +125,25 @@ function build(n:HxNodeModel,target:new()=>Slotable):HTMLElement{
         for(let k in n.style){
             let v = n.style[k];
             if(typeof(v) === 'string'){
+            	//where v is string
+                //'line-height': '24px'
                 elem.style.setProperty(k,v);
             }else{
+            	//where v is object
+                /*
+                'line-height': {
+                    value:'24px',
+                    important: true
+                }
+                */
                 elem.style.setProperty(k,v.value,v.important?'important':null);
             }
         }
     }
     if(n.DOMSlot && elem instanceof HxComponent){
+    	//for only HxComponent can be sloted-in
         for(let k in n.DOMSlot){
-            let slot = getSlot(elem.DOMSlotMap,k);
+            let slot = getSlot(elem.DOMSlotMap,k);//TODO what's this line used for?
             if(slot){
                 slotIn(elem.DOMSlotMap,k,n.DOMSlot[k]);
             }
@@ -147,11 +162,14 @@ export function View(model:HxNodeModel|Array<HxNodeModel>,containerTargetSlot?:s
         if(containerTargetSlot){
             let slot = getSlot(target.prototype.DOMSlotMap,containerTargetSlot);
             if(slot && slot.type === 'elem'){
+            	//where has target slot as element slot
                 buildPos = slot.targetElem
             }else{
+            	//where default
                 buildPos = target.prototype.container;
             }
         }else{
+        	//where also default
             buildPos = target.prototype.container;
         }
         // let builtTarget:HTMLElement;//built model

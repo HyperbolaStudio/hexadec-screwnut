@@ -52,3 +52,4 @@ export class HxAlert extends HxComponent {
         }
     }
 }
+//# sourceMappingURL=HxAlert.js.map

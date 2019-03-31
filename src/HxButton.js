@@ -140,3 +140,4 @@ HxButton = HxButton_1 = __decorate([
     Component('hx-button')
 ], HxButton);
 export { HxButton };
+//# sourceMappingURL=HxButton.js.map
