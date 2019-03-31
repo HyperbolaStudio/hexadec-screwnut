@@ -42,16 +42,90 @@ interface HxNodeModel{
     child?:Array<HxNodeModel> 
 }
 //store slots in slot map of slotable
+interface SlotHandler{
+    attr:{
+        setter:(attr:string) => void;
+        getter:() => string|null;
+    }
+    style:{
+        setter:(prop:string,priority?:'important') => void;
+        getter:() => string;
+    }
+    elem:{
+        getter:() => HTMLElement;
+    }
+}
 interface SlotDeclaration{
     targetElem:HTMLElement;
-    type:'attr'|'classList'|'style'|'DOMSlot'|'ElemSlot'|'self';
-    targetName?:string;
+    type:keyof SlotHandler;
+    targetName:string;
+}
+function getSlotHandler (slot:SlotDeclaration) {
+    let handler:SlotHandler = {
+        attr:{
+            setter:(attribute:string):void => {
+                slot.targetElem.setAttribute(slot.targetName,attribute);
+            },
+            getter:():string|null => {
+                return slot.targetElem.getAttribute(slot.targetName);
+            }
+        },
+        style:{
+            setter:(property:string,priority?:'important'):void => {
+                slot.targetElem.style.setProperty(slot.targetName,property,priority);
+            },
+            getter:():string => {
+                return slot.targetElem.style.getPropertyValue(slot.targetName);
+            }
+        },
+        elem:{
+            getter:():HTMLElement => {
+                return slot.targetElem;
+            }
+        }
+    };
+    
 }
 //implementation of component that has slot storage
 interface Slotable{
       DOMSlotMap:Map<string,SlotDeclaration>;
       container:HTMLElement;
-      _setDOMSlot:(slotName:string,value:string) => void;
+}
+function setSlot(slotMap:Map<string,SlotDeclaration>,slotName:string,slot:SlotDeclaration){
+    if(slotMap.has(slotName)){
+        throw new Error(`Error when setting slot "${slotName}": Slot already exist`);
+    }else{
+        slotMap.set(slotName,slot);
+    }
+}
+function build(n:HxNodeModel):HTMLElement{
+    let elem = document.createElement(n.tagName);
+    if(n.attr){
+        for(let k in n.attr){
+            elem.setAttribute(k,n.attr[k]);
+        }
+    }
+    if(n.style){
+        for(let k in n.style){
+            let v = n.style[k];
+            if(typeof(v) === 'string'){
+                elem.style.setProperty(k,v);
+            }else{
+                elem.style.setProperty(k,v.value,v.important?'important':null);
+            }
+        }
+    }
+    if(n.DOMSlot && elem instanceof HxComponent){
+        for(let k in n.DOMSlot){
+            
+        }
+    }
+    if(n.child){
+        for(let childModel of n.child){
+            elem.appendChild(build(childModel));
+        }
+    }
+    return elem;
 }
 export function View(model:HxNodeModel,containerTargetSlot?:string){
     return (target:(new() => Slotable)) => {
@@ -62,35 +136,6 @@ export function View(model:HxNodeModel,containerTargetSlot?:string){
             buildPos = target.prototype.container;
         }
         // let builtTarget:HTMLElement;//built model
-        function build(n:HxNodeModel):HTMLElement{
-            let elem = document.createElement(n.tagName);
-            if(n.attr){
-                for(let k in n.attr){
-                    elem.setAttribute(k,n.attr[k]);
-                }
-            }
-            if(n.style){
-                for(let k in n.style){
-                    let v = n.style[k];
-                    if(typeof(v) === 'string'){
-                        elem.style.setProperty(k,v);
-                    }else{
-                        elem.style.setProperty(k,v.value,v.important?'important':null);
-                    }
-                }
-            }
-            if(n.DOMSlot && elem instanceof HxComponent){
-                for(let k in n.DOMSlot){
-                    elem._setDOMSlot(k,n.DOMSlot[k]);
-                }
-            }
-            if(n.child){
-                for(let childModel of n.child){
-                    elem.appendChild(build(childModel));
-                }
-            }
-            return elem;
-        }
         buildPos.appendChild(build(model));
     }
 }
@@ -101,9 +146,6 @@ let x:HxNodeModel = {
     }
 }
 export class HxComponent extends HTMLElement  implements Slotable{
-    _setDOMSlot=(slotName: string, value: string) => {
-
-    }
     DOMSlotMap: Map<string, SlotDeclaration> = new Map();
     container: HTMLElement = document.createElement('div');
     constructor(){
