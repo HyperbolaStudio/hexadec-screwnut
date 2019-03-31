@@ -23,7 +23,10 @@ export function Component<K extends HxComponent>(tagName:string){
 
 
 //view builder
-interface HxNodeModel{
+interface SlotSetter{//Set slot when building node model
+    slotName:string;
+}
+interface HxNodeModel{//Build node target
     tagName:string;
     revealElemSlotName?:string;
     classList?:Array<string>;
@@ -36,12 +39,8 @@ interface HxNodeModel{
     DOMSlot?:{
         [property:string]:string;
     }
-    ElemSlot?:{
-        [property:string]:HxNodeModel|HTMLElement;
-    }
     child?:Array<HxNodeModel> 
 }
-//store slots in slot map of slotable
 interface SlotHandler{
     attr:{
         setter:(attr:string) => void;
@@ -55,12 +54,13 @@ interface SlotHandler{
         getter:() => HTMLElement;
     }
 }
+//store slots in slot map of slotable
 interface SlotDeclaration{
     targetElem:HTMLElement;
     type:keyof SlotHandler;
     targetName:string;
 }
-function getSlotHandler (slot:SlotDeclaration) {
+function getSlotHandler (slot:SlotDeclaration):SlotHandler {
     let handler:SlotHandler = {
         attr:{
             setter:(attribute:string):void => {
@@ -83,8 +83,8 @@ function getSlotHandler (slot:SlotDeclaration) {
                 return slot.targetElem;
             }
         }
-    };
-    
+    }
+    return handler;
 }
 //implementation of component that has slot storage
 interface Slotable{
@@ -92,13 +92,24 @@ interface Slotable{
       container:HTMLElement;
 }
 function setSlot(slotMap:Map<string,SlotDeclaration>,slotName:string,slot:SlotDeclaration){
-    if(slotMap.has(slotName)){
-        throw new Error(`Error when setting slot "${slotName}": Slot already exist`);
-    }else{
-        slotMap.set(slotName,slot);
+    slotMap.set(slotName,slot);
+}
+function getSlot(slotMap:Map<string,SlotDeclaration>,slotName:string){
+    return slotMap.get(slotName);
+}
+function slotIn(slotMap:Map<string,SlotDeclaration>,key:string,value:string,priority?:'important'){
+    let slot = slotMap.get(key);
+    if(slot){
+        switch(slot.type){
+            case 'attr':
+                getSlotHandler(slot).attr.setter(value);
+                break;
+            case 'style':
+                getSlotHandler(slot).style.setter(value,priority);
+        }
     }
 }
-function build(n:HxNodeModel):HTMLElement{
+function build(n:HxNodeModel,target:new()=>Slotable):HTMLElement{
     let elem = document.createElement(n.tagName);
     if(n.attr){
         for(let k in n.attr){
@@ -117,32 +128,40 @@ function build(n:HxNodeModel):HTMLElement{
     }
     if(n.DOMSlot && elem instanceof HxComponent){
         for(let k in n.DOMSlot){
-            
+            let slot = getSlot(elem.DOMSlotMap,k);
+            if(slot){
+                slotIn(elem.DOMSlotMap,k,n.DOMSlot[k]);
+            }
         }
     }
     if(n.child){
         for(let childModel of n.child){
-            elem.appendChild(build(childModel));
+            elem.appendChild(build(childModel,target));
         }
     }
     return elem;
 }
-export function View(model:HxNodeModel,containerTargetSlot?:string){
+export function View(model:HxNodeModel|Array<HxNodeModel>,containerTargetSlot?:string){
     return (target:(new() => Slotable)) => {
         let buildPos:HTMLElement;//position to build the view model
         if(containerTargetSlot){
-            buildPos = target.prototype.get(containerTargetSlot) || target.prototype.container;
+            let slot = getSlot(target.prototype.DOMSlotMap,containerTargetSlot);
+            if(slot && slot.type === 'elem'){
+                buildPos = slot.targetElem
+            }else{
+                buildPos = target.prototype.container;
+            }
         }else{
             buildPos = target.prototype.container;
         }
         // let builtTarget:HTMLElement;//built model
-        buildPos.appendChild(build(model));
-    }
-}
-let x:HxNodeModel = {
-    tagName:'div',
-    style:{
-        lineHeight:'10px',
+        if(!(model instanceof Array)){
+            buildPos.appendChild(build(model,target));
+        }else{
+            for(let m of model){
+                buildPos.appendChild(build(m,target));
+            }
+        }
     }
 }
 export class HxComponent extends HTMLElement  implements Slotable{
@@ -159,6 +178,7 @@ export class HxComponent extends HTMLElement  implements Slotable{
         this.styleLinksList.className = 'design-declaration';
 
         shadow.appendChild(this.styleLinksList);
+        shadow.appendChild(this.container);
         
     }
     updateStyle():void{
@@ -179,4 +199,16 @@ export class HxComponent extends HTMLElement  implements Slotable{
     styleLinksList:HTMLDivElement;
     // receiver:Map<any,(arg:any)=>any> = new Map<any,(arg:any)=>any>();
     static nutStyle:NutDesignDeclaration = new NutDesignDeclaration();
+}
+@Component('x-test')
+@View({
+    tagName:'p',
+    style:{
+        'width':'100px',
+        'height':'100px',
+        'background':'#00a0e9',
+    },
+})
+class XTest extends HxComponent{
+
 }
