@@ -158,6 +158,7 @@ function build(n:HxNodeModel,target:new()=>Slotable):HTMLElement{
 }
 export function View(model:HxNodeModel|Array<HxNodeModel>,containerTargetSlot?:string){
     return (target:(new() => Slotable)) => {
+        console.log(target.prototype);
         let buildPos:HTMLElement;//position to build the view model
         if(containerTargetSlot){
             let slot = getSlot(target.prototype.DOMSlotMap,containerTargetSlot);
@@ -228,5 +229,7 @@ export class HxComponent extends HTMLElement  implements Slotable{
     },
 })
 class XTest extends HxComponent{
-
+    constructor(){
+        super();
+    }
 }
