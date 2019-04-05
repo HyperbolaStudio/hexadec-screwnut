@@ -183,7 +183,7 @@ export function View(model:HxNodeModel|Array<HxNodeModel>,containerTargetSlot?:s
         }
     }
 }
-export class HxComponent extends HTMLElement  implements Slotable{
+export class HxComponent extends HTMLElement implements Slotable{
     DOMSlotMap: Map<string, SlotDeclaration> = new Map();
     container: HTMLElement = document.createElement('div');
     constructor(){
@@ -219,15 +219,15 @@ export class HxComponent extends HTMLElement  implements Slotable{
     // receiver:Map<any,(arg:any)=>any> = new Map<any,(arg:any)=>any>();
     static nutStyle:NutDesignDeclaration = new NutDesignDeclaration();
 }
-@Component('x-test')
-@View({
-    tagName:'p',
-    style:{
-        'width':'100px',
-        'height':'100px',
-        'background':'#00a0e9',
-    },
-})
+// @Component('x-test')
+// @View({
+//     tagName:'p',
+//     style:{
+//         'width':'100px',
+//         'height':'100px',
+//         'background':'#00a0e9',
+//     }
+// })
 class XTest extends HxComponent{
     constructor(){
         super();

@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"tsc --build src/tsconfig.json && webpack"
+    "build":"webpack"
   },
   "repository": {
     "type": "git",
@@ -23,12 +23,14 @@
     "url": "https://github.com/HyperbolaStudio/hexadec-screwnut/issues"
   },
   "homepage": "https://github.com/HyperbolaStudio/hexadec-screwnut#readme",
-  "devDependencies": {
+  "dependencies": {
     "webpack": "^4.29.0",
     "webpack-cli": "^3.2.1",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "babel-loader": "^8.0.5",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-dev-server": "^3.1.14",
+    "typescript":"^3.3.1",
+    "ts-loader":"^5.3.3"
   }
 }
