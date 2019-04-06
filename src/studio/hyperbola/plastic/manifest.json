@@ -1,9 +1,0 @@
-{
-    "hive":"project",
-    "package":{
-        "includePacks":[],
-        "includeModules":[
-            "nutd"
-        ]
-    }
-}
