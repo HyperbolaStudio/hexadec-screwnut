@@ -1,7 +1,7 @@
 {
   "name": "hexadec-screwnut",
-  "version": "0.0.3",
-  "description": "Library of Advanced UI Components",
+  "version": "0.0.4",
+  "description": "Web Component Builder, Advanced and Reusable.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
