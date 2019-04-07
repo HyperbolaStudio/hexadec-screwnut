@@ -1,0 +1,1 @@
+export type BasicTypes = number|string|boolean;

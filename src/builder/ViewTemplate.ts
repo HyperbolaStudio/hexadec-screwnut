@@ -1,14 +1,14 @@
 import {SlotDeclaration} from './slot/SlotDeclaration';
-import { SlotType } from './slot/SlotType';
-export interface ViewTemplate<T = SlotType|SlotDeclaration>{
+import { BasicTypes } from '../BasicTypes';
+export interface ViewTemplate<T = BasicTypes|SlotDeclaration>{
     tag:string;
     id:string;
     classList?:string[];
-    attr:{
+    attr?:{
         [property:string]:T;
     }
-    style:{
+    style?:{
         [property:string]:T;
     }
-    child:Array<ViewTemplate>|T;
+    child?:Array<ViewTemplate>|T;
 }

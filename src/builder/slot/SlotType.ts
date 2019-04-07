@@ -1,1 +1,0 @@
-export type SlotType = number|string|boolean;

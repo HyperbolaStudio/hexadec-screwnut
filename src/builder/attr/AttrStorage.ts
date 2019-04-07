@@ -1,4 +1,6 @@
+import {BasicTypes} from '../../BasicTypes';
 export interface AttrStorage{
-    bindStateName:string;
-    onChanged:(newVal:string,oldVal:string) => void;
+    val:BasicTypes;
+    bindStateName?:string;
+    onChanged?:(newVal:string,oldVal:string) => void;
 }

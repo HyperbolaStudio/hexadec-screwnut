@@ -1,4 +1,4 @@
-import {SlotType} from './SlotType';
+import {BasicTypes} from '../../BasicTypes';
 export interface SlotDeclaration{
-    [property:string]:SlotType;
+    [property:string]:BasicTypes;
 }
