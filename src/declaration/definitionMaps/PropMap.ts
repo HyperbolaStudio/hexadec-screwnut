@@ -1,8 +1,8 @@
-import { AbstractMap } from "./AbstractMap";
+import { AbstractDefinitionMap } from "./AbstractDefinitionMap";
 
 interface Prop{
     descriptor:PropertyDescriptor;
     bindStateName:string;
 }
 
-export interface PropMap extends AbstractMap<Prop>{}
+export interface PropMap extends AbstractDefinitionMap<Prop>{}

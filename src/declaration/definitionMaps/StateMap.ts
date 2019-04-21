@@ -1,4 +1,4 @@
-import {AbstractMap} from './AbstractMap'
+import {AbstractDefinitionMap} from './AbstractDefinitionMap'
 
 interface State{
     name:string;
@@ -6,4 +6,4 @@ interface State{
     bindPropName:string;
 }
 
-export interface StateMap extends AbstractMap<State>{}
+export interface StateMap extends AbstractDefinitionMap<State>{}
