@@ -17,20 +17,17 @@ let bOn = (e:EventPost<number>):boolean => {
     return e.arg > 5;
 }
 let rv = new Receivable<rat,rrt>();
-rv.setReceiver('a',aOn);
-rv.setReceiver('b',bOn);
+rv.receiver('a').set(aOn);
 
 let rva = new Receivable<rat,rrt>();
-rva.setReceiver('a',aOn);
-rva.setReceiver('b',bOn);
-rva.parent = rv;
+rva.receiver('a').set(aOn);
+rva.receiver('b').set(bOn);
 
 let rvb = new Receivable<rat,rrt>();
-rvb.setReceiver('a',aOn);
-rvb.setReceiver('b',bOn);
-rvb.parent = rv;
+rvb.receiver('a').set(aOn);
+rvb.receiver('b').set(bOn);
 
-rv.children = [rva,rvb];
+rv.appendChild(rva,rvb);
 
-console.log(rv.broadcast('a','fffff'));
-console.log(rvb.emit('b',4));
+console.log(rv.broadcast('b',4));
+console.log(rvb.emit('a','fff'));
