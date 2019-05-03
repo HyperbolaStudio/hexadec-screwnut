@@ -24,7 +24,7 @@ interface BroadcastReturnNode{
 interface ReceiverAccessor<ArgType = any,RetType = any>{
 	/**
 	 * Get receiver callback.
-	 * @return Event callback
+	 * @returns Event callback
 	 */
     get:() => ((eventPost:EventPost<ArgType>) => RetType)|null;
     
@@ -47,7 +47,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
 	/**
 	 * Receiver accessor.
 	 * @param eventKey Key of event to access
-	 * @return Receiver accessor (currying)
+	 * @returns Receiver accessor (currying)
 	 */
     receiver<K extends keyof RecvArgTypes,R extends keyof RecvReturnTypes>(eventKey:K&R):ReceiverAccessor<RecvArgTypes[K],RecvReturnTypes[R]>;
     receiver(eventKey:string):ReceiverAccessor;
@@ -76,7 +76,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
     
     /**
      * Get this target's parent.
-     * @return Parent receivable
+     * @returns Parent receivable
      */
     get parent(){
         return this._parent;
@@ -84,7 +84,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
     
     /**
      * Get this target's children
-     * @return Child receivables
+     * @returns Child receivables
      */
     get children(){
         return this._children;
@@ -116,7 +116,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
     
     /**
      * Is this a child of a receivable.
-     * @return It's obvious what is returned here. What to say????
+     * @returns It's obvious what is returned here. What to say????
      */
     get isConnected(){
         return Boolean(this._parent);
@@ -126,7 +126,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
 	 * Call a event.
 	 * @param eventKey The event to call
 	 * @param arg Argument to pass
-	 * @return Event callback's return value
+	 * @returns Event callback's return value
 	 */
     call(eventKey:string,arg:any){
         let post:EventPost = {
@@ -145,7 +145,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
      * @param eventKey Event to emit
      * @param Argumrnt to pass
      * @param post Post of an emit event (Maybe it will be deprecated after recursion is replaced by while statement)
-     * @return Callbacks' return values
+     * @returns Callbacks' return values
      */
     emit(
         eventKey:string,
@@ -174,7 +174,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
      * @param eventKey Event to emit
      * @param Argumrnt to pass
      * @param post Post of a broadcast event
-     * @return Callbacks' return values tree
+     * @returns Callbacks' return values tree
      */
     broadcast(
         eventKey:string,
@@ -208,7 +208,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
      * Emit a event (Async)
      * @param eventKey Event to emit
      * @param Argumrnt to pass
-     * @return Callbacks' return values promise
+     * @returns Callbacks' return values promise
      */
     emitAsync(eventKey:string,arg:any):Promise<any[]>{
         let p:Array<Promise<any>> = [];
