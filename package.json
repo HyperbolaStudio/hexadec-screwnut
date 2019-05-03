@@ -1,11 +1,11 @@
 {
   "name": "hexadec-screwnut",
-  "version": "0.0.3",
-  "description": "Library of Advanced UI Components",
+  "version": "0.0.4",
+  "description": "Web Component Builder, Advanced and Reusable.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"webpack"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -24,13 +24,16 @@
   },
   "homepage": "https://github.com/HyperbolaStudio/hexadec-screwnut#readme",
   "dependencies": {
-    "webpack": "^4.29.0",
-    "webpack-cli": "^3.2.1",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "babel-loader": "^8.0.5",
-    "webpack-dev-server": "^3.1.14",
-    "typescript":"^3.3.1",
-    "ts-loader":"^5.3.3"
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.1",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "devDependencies": {
+    "ts-node": "^8.0.3"
   }
 }
