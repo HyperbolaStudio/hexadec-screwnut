@@ -12,12 +12,16 @@ let aOn = (e:EventPost<string>):number => {
     console.log(11);
     return e.arg.length;
 }
+let aOn1 = (e:EventPost<string>):number => {
+    console.log(1111);
+    return e.arg.length;
+}
 let bOn = (e:EventPost<number>):boolean => {
     console.log(22);
     return e.arg > 5;
 }
 let rv = new Receivable<rat,rrt>();
-rv.receiver('a').set(aOn);
+rv.receiver('a').set(aOn1);
 
 let rva = new Receivable<rat,rrt>();
 rva.receiver('a').set(aOn);

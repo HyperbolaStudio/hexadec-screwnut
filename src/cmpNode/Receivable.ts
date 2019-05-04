@@ -92,31 +92,31 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
     
     /**
      * Append children receivables.
-     * @param child Children to append
-     * @todo Why this param is named "child"??? It should be "children"????
+     * @param children Children to append
+     * @returns The length of children
      */
-    appendChild(...child:Receivable[]):number{
-        for(let c of child){
+    appendChild(...children:Receivable[]):number{
+        for(let c of children){
             c._parent = this;
         }
-        return this._children.push(...child);
+        return this._children.push(...children);
     }
     
     /**
      * Prepend children receivables.
-     * @param child Children to prepend
-     * @todo same as that above
+     * @param children Children to prepend
+     * @returns the length of children
      */
-    prependChild(...child:Receivable[]):number{
-        for(let c of child){
+    prependChild(...children:Receivable[]):number{
+        for(let c of children){
             c._parent = this;
         }
-        return this._children.unshift(...child);
+        return this._children.unshift(...children);
     }
     
     /**
      * Is this a child of a receivable.
-     * @returns It's obvious what is returned here. What to say????
+     * @returns It's obvious what is returned here.
      */
     get isConnected(){
         return Boolean(this._parent);
@@ -143,36 +143,38 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
     /**
      * Emit a event
      * @param eventKey Event to emit
-     * @param Argumrnt to pass
-     * @param post Post of an emit event (Maybe it will be deprecated after recursion is replaced by while statement)
+     * @param Argument to pass
      * @returns Callbacks' return values
      */
     emit(
         eventKey:string,
         arg:any,
-        post:EventPost = {
+    ):Array<any>{
+        let post:EventPost = {
             arg:arg,
             path:[this],
             postDirection:'emit'
-        }
-    ):Array<any>{
+        };
         let r = [];
-        let recv = this.receiver(eventKey).get();
-        if(recv){
-            r.push(recv(post));
-        }
-        if(this._parent){
-            post.path.push(this._parent);
-            //TODO Why not try while statement?
-            r.push(...this._parent.emit(eventKey,arg,post));
-        }
+        let target = this;
+        while(1){
+            let recv = target.receiver(eventKey).get();
+            if(recv){
+                r.push(recv(post));
+            }
+            if(target._parent){
+                post.path.push(target._parent);
+            }else{
+                break;
+            }
+        }       
         return r;
     }
 
 	/**
      * Broadcast a event
      * @param eventKey Event to emit
-     * @param Argumrnt to pass
+     * @param Argument to pass
      * @param post Post of a broadcast event
      * @returns Callbacks' return values tree
      */
@@ -198,6 +200,8 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
                     path:[...post.path,child],
                     postDirection:'broadcast'
                 }
+                //An interesting DFS
+                //Yep, we must use recursion here.
                 r.next.push(child.broadcast(eventKey,arg,cPost));
             }
         }
@@ -207,7 +211,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
 	/**
      * Emit a event (Async)
      * @param eventKey Event to emit
-     * @param Argumrnt to pass
+     * @param Argument to pass
      * @returns Callbacks' return values promise
      */
     emitAsync(eventKey:string,arg:any):Promise<any[]>{
