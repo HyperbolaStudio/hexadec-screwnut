@@ -93,25 +93,32 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
     /**
      * Append children receivables.
      * @param children Children to append
-     * @returns The length of children
      */
-    appendChild(...children:Receivable[]):number{
+    appendChild(...children:Receivable[]):void{
         for(let c of children){
             c._parent = this;
         }
-        return this._children.push(...children);
+        this._children.push(...children);
     }
     
     /**
      * Prepend children receivables.
      * @param children Children to prepend
-     * @returns the length of children
      */
-    prependChild(...children:Receivable[]):number{
+    prependChild(...children:Receivable[]):void{
         for(let c of children){
             c._parent = this;
         }
-        return this._children.unshift(...children);
+        this._children.unshift(...children);
+    }
+
+    /**
+     * Insert children receivables.
+     * @param index Location
+     * @param children Children to prepend
+     */
+    insertChild(index:number,...children:Receivable[]):void{
+        this._children.splice(1,0,...children);
     }
     
     /**
