@@ -20,14 +20,14 @@ let bOn = (e:EventPost<number>):boolean => {
     console.log(22);
     return e.arg > 5;
 }
-let rv = new Receivable<rat,rrt>();
+let rv = new Receivable();
 rv.receiver('a').set(aOn1);
 
-let rva = new Receivable<rat,rrt>();
+let rva = new Receivable();
 rva.receiver('a').set(aOn);
 rva.receiver('b').set(bOn);
 
-let rvb = new Receivable<rat,rrt>();
+let rvb = new Receivable();
 rvb.receiver('a').set(aOn);
 rvb.receiver('b').set(bOn);
 

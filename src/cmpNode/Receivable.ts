@@ -18,27 +18,25 @@ interface BroadcastReturnNode{
 /**
  * Currying accessor for receiver.
  * Why currying? For TypeScript type-checking. If not currying, Overload function leads it to AnyScript. Fxck TypeScript.????
- * @param <ArgType> Argument type of receiver callback
- * @param <RetType> Return type of receiver callback
  */
-interface ReceiverAccessor<ArgType = any,RetType = any>{
+interface ReceiverAccessor{
 	/**
 	 * Get receiver callback.
 	 * @returns Event callback
 	 */
-    get:() => ((eventPost:EventPost<ArgType>) => RetType)|null;
+    get:() => ((eventPost:EventPost) => any)|null;
     
     /**
      * Set receiver callback.
      * @param on Event callback
      */
-    set:(on:((eventPost:EventPost<ArgType>) => RetType)) => void;
+    set:(on:((eventPost:EventPost) => any)) => void;
 }
 
 /**
  * Implementation of a Receivable target.
  */
-export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
+export class Receivable{
 	/**
 	 * Storage of events.
 	 */
@@ -49,7 +47,7 @@ export class Receivable<RecvArgTypes = any,RecvReturnTypes = any>{
 	 * @param eventKey Key of event to access
 	 * @returns Receiver accessor (currying)
 	 */
-    receiver<K extends keyof RecvArgTypes,R extends keyof RecvReturnTypes>(eventKey:K&R):ReceiverAccessor<RecvArgTypes[K],RecvReturnTypes[R]>;
+    //receiver<K extends keyof RecvArgTypes,R extends keyof RecvReturnTypes>(eventKey:K&R):ReceiverAccessor<RecvArgTypes[K],RecvReturnTypes[R]>;
     receiver(eventKey:string):ReceiverAccessor;
     receiver(eventKey:string){
         return {
