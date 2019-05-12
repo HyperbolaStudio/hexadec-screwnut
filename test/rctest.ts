@@ -14,7 +14,7 @@ let aOn = (e:EventPost<string>):number => {
 }
 let aOn1 = (e:EventPost<string>):number => {
     console.log(1111);
-    return e.arg.length;
+    return e.arg.length+1;
 }
 let bOn = (e:EventPost<number>):boolean => {
     console.log(22);
@@ -35,3 +35,6 @@ rv.appendChild(rva,rvb);
 
 console.log(rv.broadcast('b',4));
 console.log(rvb.emit('a','fff'));
+rvb.emitAsync('a','fff').then((res) => {
+    console.log(res);
+})

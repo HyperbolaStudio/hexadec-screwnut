@@ -154,25 +154,21 @@ export class Receivable{
     emit(
         eventKey:string,
         arg:any,
-    ):Array<any>{
-        let post:EventPost = {
+        post:EventPost = {
             arg:arg,
             path:[this],
             postDirection:'emit'
-        };
+        }
+    ):Array<any>{
         let r = [];
-        let target = this;
-        while(1){
-            let recv = target.receiver(eventKey).get();
-            if(recv){
-                r.push(recv(post));
-            }
-            if(target._parent){
-                post.path.push(target._parent);
-            }else{
-                break;
-            }
-        }       
+        let recv = this.receiver(eventKey).get();
+        if(recv){
+            r.push(recv(post));
+        }
+        if(this.parent){
+            post.path.push(this.parent);
+            r.push(...this.parent.emit(eventKey,arg,post));
+        }
         return r;
     }
 
@@ -180,7 +176,6 @@ export class Receivable{
      * Broadcast a event
      * @param eventKey Event to emit
      * @param Argument to pass
-     * @param post Post of a broadcast event
      * @returns Callbacks' return values tree
      */
     broadcast(
