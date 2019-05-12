@@ -1,8 +1,11 @@
-import { AbstractDefinitionMap } from "./AbstractDefinitionMap";
+import { AbstractDefinitionMap, AnyMap } from "./AbstractDefinitionMap";
 
-interface Prop{
-    descriptor:PropertyDescriptor;
-    bindStateName:string;
+interface Prop<T>{
+    initVal:T;
+    beforeWritten:(oldVal:T,writtenVal:T) => T;
+    beforeRead:(readVal:T) => T;
 }
 
-export interface PropMap extends AbstractDefinitionMap<Prop>{}
+export type PropMap<PropTypesMap extends AnyMap> = {
+    [K in keyof PropTypesMap]:Prop<PropTypesMap[K]>;
+}
